@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -8,3 +9,50 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public_html/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> Mio ###
+/public_html/tds/
+/public_html/error_log*
+/public_html/.htaccess
+
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+.contactemail
+.cpanel/
+.cphorde/
+.dns
+.emacs
+.gemrc
+.htpasswds/
+.lastlogin
+.softaculous/
+.spamassassin/
+.spamassassinenable
+access-logs
+/etc/
+/logs/
+/mail/
+/perl5/
+/public_ftp/
+/ssl/
+/tmp/
+www
+/.composer/
+.gitconfig
+.gitignore
+.kshrc
+.security/
+.spamassassinboxenable
+/error_log*
+/.web-server-pid
+/.vscode
+###< Mio ###

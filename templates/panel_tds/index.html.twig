@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TDS::BCMX{% endblock %}
+
+{% block body %}
+{% apply spaceless %}
+
+<!-- Modales -->
+<div class="modal fade" id="modalLstSolicitudesDisenio" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalLstSolicitudesDisenioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLstSolicitudesDisenioLabel">Buscando Diseños</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalDownloadFotoDisenio" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalDownloadFotoDisenioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDownloadFotoDisenioLabel">Visor de Imágenes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <a href="#" id="dowloadFoto" class="btn btn-primary">Descargar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container p-5" id="containerMain">
+
+    <section class="row">
+      <article class="col">
+        <div class="bg-white rounded p-3">
+          <aside class="row p-3">
+
+            <a href="{{ path('bcmx_cpanel-index') }}" class="btn btn-dark badge-pill">
+              <i class="fas fa-arrow-left pt-1" style="font-size: 1.8rem;"></i>
+            </a>
+
+            <button class="btn btn-primary d-flex badge-pill mx-3" type="button" data-tipo="nuevos" data-titulo="Lista de Diseños Nuevos" data-toggle="modal" data-target="#modalLstSolicitudesDisenio">
+              <span style="font-size: 1.2rem;" class="mr-2 d-block pt-1 px-2">BANDEJA </span>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-bell" style="font-size: 1.8rem;"></i>
+                <div>
+                    <span id="setCantNews" class="badge badge-pill badge-danger">
+                      <div style="width: 15px; height:15px" class="spinner-border text-light" role="status"></div>
+                    </span>
+                </div>
+              </div>
+            </button>
+
+            <button class="btn btn-success d-flex badge-pill" type="button" data-tipo="mios" data-titulo="Lista de Mis Diseños" data-toggle="modal" data-target="#modalLstSolicitudesDisenio">
+              <span style="font-size: 1.2rem;" class="mr-2 d-block pt-1 px-2">MIS DISEÑOS </span>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-clipboard-list" style="font-size: 1.8rem;"></i>
+                <div>
+                    <span id="setCantMios" class="badge badge-pill badge-danger ml-1">
+                      <div style="width: 15px; height:15px" class="spinner-border text-light" role="status"></div>
+                    </span>
+                </div>
+              </div>
+            </button>
+
+            <h2 class="p-0 m-0 ml-5 font-weight-bold text-primary">PIZARRA DE DISEÑO</h2>
+
+            <a id="terminarProceso" href="{{ path('bcmx_cpanel-index') }}" class="btn btn-success badge-pill ml-auto d-none">
+              <i class="fas fa-check-double pt-1" style="font-size: 1.8rem;"></i>
+            </a>
+          </aside>
+          <hr class="m-0 p-0 mt-3">
+          <div class="text-right mb-3">
+            <small id="msgTdGral" class="d-block p-0 m-0 text-danger font-weight-bold">Selecciona un Diseño para procesar</small>
+          </div>
+          <span id="getPathToUpPdf" data-url="{{ path('tds_panel-upload_pdf_final', {'filename':'__url__'}) }}"></span>
+          <span id="getPathasPdf" data-url="{{ path('tds_panel-checkPDFExiste', {'filename':'__uri__'}) }}"></span>
+          <aside class="row px-2" id="contenedorDelPanel" data-genqr="{{ path('tds_panel-getQrPeq', {'uri': '__uri__'}) }}"> </aside>
+          <span id="toS" data-info="{{ app.session.get('tokenServer')}}"></span>
+          <span id="idU" data-id="{{ app.session.get('dataUser')['u_id'] }}"></span>
+        </div>
+      </article>
+    </section>
+</div>
+{% endapply %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('panelDisenio') }}
+  <script id="lstTdsNews" type="text/x-jsrender">{% include 'renders/pl_lst_tds_news.html.twig' %}</script>
+  <script id="panelDisenio" type="text/x-jsrender">{% include 'renders/pl_panel_disenio.html.twig' %}</script>
+  <script id="icoFotos" type="text/x-jsrender">{% include 'renders/pl_icos_fotos.html.twig' %}</script>
+  <script id="disTomado" type="text/x-jsrender">{% include 'renders/pl_dis_tomado.html.twig' %}</script>
+{% endblock %}

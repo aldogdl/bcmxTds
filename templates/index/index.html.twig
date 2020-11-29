@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel BCMX{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Hello! {{ app.session.get('dataUser')['u_username'] }} </h1>
+
+    <a href="{{ path('tds_panel-index') }}">Panel de Tarjetas Digitales</a>
+</div>
+{% endblock %}

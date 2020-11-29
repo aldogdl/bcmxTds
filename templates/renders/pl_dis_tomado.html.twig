@@ -1,0 +1,14 @@
+<small class="d-block mt-3 text-muted">Nombre del Archivo:</small>
+<span class="d-block"> <%:~nombreCut(nombreFile) %> </span>
+<small class="d-block text-right">
+  <a href="#" id="copiarNombreFile" data-url="<%:nombreFile %>">Copiar Nombre</a>
+</small>
+
+<div class="text-center">
+  <div id="containerQrPeq">...</div>
+  <small class="d-block"> <a href="{{ path('tds_panel-getQrBig', {'uri':'__uri__'}) }}" id="downloadQrLink" class="text-decoration-none text-primary ml-auto d-none">Descargar QR</a> </small>
+</div>
+
+<div id="containerFrmUp" class="mt-2">
+  {{ render(controller('App\\Controller\\Tds\\PanelTdsController::getFrmUploadPdf')) }}
+</div>

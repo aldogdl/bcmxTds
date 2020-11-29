@@ -1,0 +1,73 @@
+<div class="col-3 bg-light">
+  <h6 class="font-weight-bold">Datos de Contacto</h6>
+  <hr>
+  <small class="d-block text-muted">Nombre de la Empresa</small>
+  <span ><%:td_nombreEmpresa %></span>
+  <small class="d-block mt-3 text-muted">Nombre del Cliente</small>
+  <span class="d-block"><%:us_nombre %></span>
+  <small class="d-block mt-3 text-muted">Número de Celular:</small>
+  <span class="d-block"><%:td_whatsapp %></span>
+  <small class="d-block mt-3 text-muted">Número Fijo:</small>
+  <span class="d-block"><%:td_telfijo %></span>
+  <small class="d-block mt-3 text-muted">Giro de la Empresa</small>
+  <span class="d-block"><%:td_giro %></span>
+  <small class="d-block mt-3 text-muted">Que Vende</small>
+  <span class="d-block"><%:td_queVende %></span>
+</div>
+
+<div class="col-3" id="idDisSelect" data-iddis="<%:ds_id %>">
+  <h6 class="font-weight-bold">Datos de Diseño</h6>
+  <hr>
+  <div class="d-flex" id="contentFotos"> ... </div>
+  <small class="d-block mt-3 text-muted">Detalles sobre las Fotos</small>
+  <span ><%:ds_descriptLogo %></span>
+  <small class="d-block mt-3 text-muted">Color de Fondo</small>
+  <span ><%:ds_colorFondo %></span>
+  <small class="d-block mt-3 text-muted">Color de Texto</small>
+  <span class="d-block"><%:ds_colorTexto %></span>
+  <small class="d-block mt-3 text-muted">Color de Iconos</small>
+  <span class="d-block"><%:ds_colorIconos %></span>
+  <small class="d-block mt-3 text-muted">Notas Adicionales</small>
+  <span class="d-block"><%:ds_notasAdds %></span>
+  <span id="getContenido" data-url="https://buscomex.com/tds/td_mireya.pdf"></span>
+</div>
+
+<div class="col-3 bg-light">
+  <h6 class="font-weight-bold">Link a Adicionar</h6>
+  <hr>
+  <%for td_lstLinks %>
+    <div class="bg-ligth">
+      <div class="d-felx">
+        <%if value %>
+          <i class="fas fa-check text-primary"></i>
+        <%/if %>
+        <span class="mr-2"><%:value %></span>
+        <a href="#" id="copyar<%:#getIndex() %>" data-url="<%:urlCliente %>">copiar</a>
+      </div>
+      <small class="d-block mb-3 text-success"><%:~cortarTxt(urlCliente) %></small>
+    </div>
+  <%/for %>
+</div>
+
+<div class="col-3">
+  <h6 class="font-weight-bold">Más Información</h6>
+  <hr>
+  <a class="btn btn-danger btn-sm badge-pill px-2 btn-block" data-idtd="<%:td_id %>" data-nemp="<%:td_nombreEmpresa %>" id="takeDisenio" href="#">TOMAR DISEÑO</a>
+  <div class="alert alert-warning text-center mt-1 d-none" id="divProcesandoTake">
+    <div class="spinner-border text-info" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+    <small class="d-block">Procesando</small>
+  </div>
+  <small class="d-block mt-3 text-muted">Vendido por:</small>
+  <span class="d-block"><%:v_nombre %></span>
+  <div class="mt-2" id="disTomadoContainer">
+    <p>
+      <small class="d-block text-muted p-2">
+        Si vas a elaborar el diseño, por favor, presiona el botón titulado
+        <b class="text-danger">"TOMAR DISEÑO"</b>, al realizar dicha acción, se te asignará la elaboración
+        del archivo final (PDF), y se elaborarán los datos neesario para continuar.
+      </small>
+    </p>
+  </div>
+</div>
