@@ -3,15 +3,18 @@
 namespace App\Http;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class SecurityHttp
 {
 
     private $http;
+    private $bcmxPath;
 
-    function __construct(HttpClientInterface $client)
+    function __construct(HttpClientInterface $client, ParameterBagInterface $params)
     {
         $this->http = $client;
+        $this->bcmxPath = ($params->get('tipoEnv') == 'dev') ? 'http://localhost:8000' : 'https://dbzm.info';
     }
 
     /**
@@ -21,7 +24,7 @@ class SecurityHttp
     {
         $response = $this->http->request(
             'POST',
-            'http://localhost:8000/login_admin/login_check',
+            $this->bcmxPath . '/login_admin/login_check',
             ['body' => $dataSend]
         );
         $statusCode = $response->getStatusCode();
@@ -39,7 +42,7 @@ class SecurityHttp
     {
         $response = $this->http->request(
             'POST',
-            'http://localhost:8000/apis/zmpanel/panel/get-data-user/',
+            $this->bcmxPath . '/apis/zmpanel/panel/get-data-user/',
             [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $token
@@ -61,6 +64,5 @@ class SecurityHttp
             }
         }
         return ['err'];
-    }    
+    }
 }
-

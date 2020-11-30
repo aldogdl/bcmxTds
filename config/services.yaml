@@ -4,8 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    tipoEnv: '%env(APP_ENV)%'
     pathUpPdfs: '%kernel.project_dir%/public_html/tds'
     pathToPdfs: 'https://buscomex.com/tds/'
+
 services:
     # default configuration for services in *this* file
     _defaults:

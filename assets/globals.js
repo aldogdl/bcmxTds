@@ -14,7 +14,7 @@ export default function(nombreFnc) {
   //
   function getGlobals() {
 
-    const env = 'dev';
+    const env = 'prod';
     const protocolo = (env == 'dev') ? 'http://' : 'https://';
     const base      = (env == 'dev') ? 'localhost:8000' : 'dbzm.info';
     const baseSelf  = (env == 'dev') ? 'localhost:8001' : 'buscomex.com';
