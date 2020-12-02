@@ -7,7 +7,7 @@ $(document).ready(function(){
   var global = globals('getGlobals');
   _getCantidades();
 
-  // fnc ModalGetTdsNewsMys
+  /// fnc ModalGetTdsNewsMys
   $('#modalLstSolicitudesDisenio').on('shown.bs.modal', function (event) {
     var modal = $(this);
     var button = $(event.relatedTarget);
@@ -44,7 +44,7 @@ $(document).ready(function(){
     modal.find('.modal-body').html(htmlCargando.render());
   });
 
-  // fnc ModalGetTdsNuevos
+  /// fnc ModalGetTdsNuevos
   $('#modalDownloadFotoDisenio').on('shown.bs.modal', function (event) {
     var modal = $(this);
     var button = $(event.relatedTarget);
@@ -58,7 +58,7 @@ $(document).ready(function(){
     modal.find('#dowloadFoto').attr('href', uri);
   });
 
-  // terminar el diseño
+  /// terminar el diseño
   $('#terminarProceso').click(function(e){
     e.preventDefault();
     var titPage = $('#msgTdGral').text();
@@ -98,6 +98,16 @@ $(document).ready(function(){
         }else{
           return txt;
         }
+      },
+      'orderQueVende': function(txt) {
+        var lista = txt.split(',');
+        if(lista.length > 0) {
+          for (var i = 0; i < lista.length; i++) {
+            lista[i] = $.trim(lista[i]);
+          }
+          return lista.join(', ');
+        }
+        return txt;
       }
     };
 
@@ -118,7 +128,6 @@ $(document).ready(function(){
 
     if(dataTd['em_id'] > 0){
       dataTd = {'nombreFile':dataTd['td_td']};
-      _determinarTitulo(dataTd['nombreFile']);
       _printDataDisenioTomado(dataTd);
     }else{
       // Click para tomar el diseño de la digital
@@ -199,9 +208,11 @@ $(document).ready(function(){
     // Ir por el QR pequeño.
     var uri = $('#contenedorDelPanel').data('genqr');
     uri = uri.replace('__uri__', data['nombreFile']);
+    var noF = data['nombreFile'];
     http('GET', uri, function(data){
       var img = $('<img/>').attr('src', data['qr']).css({'height':200});
       $('#contenedorDelPanel').find('#containerQrPeq').html(img);
+      _determinarTitulo(noF);
       data = undefined;
     });
     data = undefined;
@@ -269,7 +280,7 @@ $(document).ready(function(){
     lstFotos = undefined;
   }
 
-  // copiar al portapapeles
+  /// copiar al portapapeles
   function copiarAlPortapapeles(id_elemento) {
     var $temp = $("<input>")
     $("body").append($temp);
@@ -278,9 +289,9 @@ $(document).ready(function(){
     $temp.remove();
   }
 
-  ///
+  /// Ir por las cantidades de diseños nuevos y los que tiene el diseñador acualmente
   function _getCantidades() {
-    // Ir por la lista de Nuevos Diseños.
+
     http('GET', global.uriBasePanel + '/' + $('#idU').data('id') +'/get-cant-tds/', function(data){
       $('#setCantNews').html(data['nuevos']);
       $('#setCantMios').html(data['mios']);
@@ -288,7 +299,7 @@ $(document).ready(function(){
     });
   }
 
-  ///
+  /// Vemos si existe el PDF en fisico del registro visualizado
   function _determinarTitulo(nombreFile) {
 
     var uri = $('#getPathasPdf').data('url');
@@ -311,6 +322,5 @@ $(document).ready(function(){
     }); //fin del HTTP.
     return;
   }
-
 
 });
