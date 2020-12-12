@@ -14,6 +14,7 @@ use App\Services\SeguridadService;
 use App\Services\GenQr;
 use App\Entity\ArchPdf;
 use App\Form\ArchPdfType;
+use Gregwar\Image\Image;
 
 /**
  * @Route("/bcmx/tds/panel/")
@@ -58,23 +59,6 @@ class PanelTdsController extends AbstractController
     }
 
     /**
-    * @Route("{filenameNew}/cambiar-nombre-file/{filenameOld}/", methods={"POST"}, name="tds_panel-cambiarNombreFile")
-    */
-    public function cambiarNombreFile(string $filenameNew, string $filenameOld)
-    {
-      $result = ['abort' => false];
-      $base = $this->getParameter('pathUpPdfs');
-      $fuente = $base . '/' . $filenameOld;
-      $destino = $base . '/' . $filenameNew;
-      if(is_file($fuente)) {
-          rename($fuente, $destino);
-      }else{
-        $result['abort'] = true;
-      }
-      return $this->json($result);
-    }
-
-    /**
     * @Route("{filename}/upload-pdf-final/", name="tds_panel-upload_pdf_final")
     */
     public function uploadPdf(Request $req, string $filename)
@@ -89,16 +73,35 @@ class PanelTdsController extends AbstractController
               // Move the file to the directory where brochures are stored
               try {
                   $pdf->move($this->getParameter('pathUpPdfs'), $filename);
+                  $res = $this->pdfToImg($filename);
                   return $this->json(['result' => 'ok']);
               } catch (FileException $e) {
                   // ... handle exception if something happens during file upload
               }
           }
       }
+
       $frm = $this->renderView('renders/ctrl_frm_upload_pdf.html.twig', [
         'frm' => $frm->createView()
       ]);
       return $this->json(['result' => $frm]);
+    }
+
+    /**
+    * @Route("{filenameNew}/cambiar-nombre-file/{filenameOld}/", methods={"POST"}, name="tds_panel-cambiarNombreFile")
+    */
+    public function cambiarNombreFile(string $filenameNew, string $filenameOld)
+    {
+      $result = ['abort' => false];
+      $base = $this->getParameter('pathUpPdfs');
+      $fuente = $base . '/' . $filenameOld;
+      $destino = $base . '/' . $filenameNew;
+      if(is_file($fuente)) {
+          rename($fuente, $destino);
+      }else{
+        $result['abort'] = true;
+      }
+      return $this->json($result);
     }
 
     /**
@@ -127,5 +130,21 @@ class PanelTdsController extends AbstractController
         return $response;
     }
 
+    /**
+    * Cremos la imagen de presentacion de la tarjeta.
+    */
+    public function pdfToImg($nombreFile): bool
+    {
+      $fuente = $this->getParameter('pathUpPdfs') . '/' . $nombreFile;
+      $partes = explode('.', $nombreFile);
+      $destino = $this->getParameter('pathThumTds') . '/' . $partes[0] .'.jpg';
+      exec('/usr/bin/ghostscript -sDEVICE=jpeg -dBATCH -dSAFER -dNOPAUSE -sOutputFile=' . $destino . ' ' . $fuente);
 
+      if(is_file($destino)){
+        Image::open($destino)->crop(0, 0, 350, 260)->save($destino);
+        return true;
+      }else{
+        return false;
+      }
+    }
 }

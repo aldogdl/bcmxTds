@@ -19,6 +19,7 @@ yarn-error.log
 
 ###> Mio ###
 /public_html/tds/
+/public_html/thum_tds/
 /public_html/error_log*
 /public_html/.htaccess
 

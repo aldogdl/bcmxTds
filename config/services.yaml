@@ -5,8 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     tipoEnv: '%env(APP_ENV)%'
-    pathUpPdfs: '%kernel.project_dir%/public_html/tds'
-    pathToPdfs: 'https://buscomex.com/tds/'
+    pathUpPdfs:  '%kernel.project_dir%/public_html/tds'
+    pathThumTds: '%kernel.project_dir%/public_html/thum_tds'
+    pathToPdfs:  'https://buscomex.com/tds/'
 
 services:
     # default configuration for services in *this* file
