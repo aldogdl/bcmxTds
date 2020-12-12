@@ -14,7 +14,7 @@ export default function(nombreFnc) {
   //
   function getGlobals() {
 
-    const env = 'prod';
+    const env = $('#getEnv').data('env');
     const protocolo = (env == 'dev') ? 'http://' : 'https://';
     const base      = (env == 'dev') ? 'localhost:8000' : 'dbzm.info';
     const baseSelf  = (env == 'dev') ? 'localhost:8001' : 'buscomex.com';
@@ -24,6 +24,7 @@ export default function(nombreFnc) {
       'base'      : base,
       'dominio'   : dominio,
       'uriBaseDb' : dominio,
+      'uriBaseSelf': 'https://' + baseSelf,
       'uriBasePanel' : dominio + '/apis/zmpanel/panel',
       'pathImgsDisNews' : (env == 'dev') ? 'bcmx_tds/fotos_for_disenio' : 'bcmx_tds/fotos_for_disenio',
     };

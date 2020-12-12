@@ -4,19 +4,35 @@ import http from './http';
 
 $(document).ready(function(){
 
+  var campo = '';
+  var linkOld = '0';
+
   var global = globals('getGlobals');
+  var idDiseniador = $('#idU').data('iduser');
   _getCantidades();
 
   /// fnc ModalGetTdsNewsMys
   $('#modalLstSolicitudesDisenio').on('shown.bs.modal', function (event) {
+
     var modal = $(this);
     var button = $(event.relatedTarget);
     var htmlCargando = $.templates('#cargando');
     var tipoGet = button.data('tipo');
-    var idDiseniador = $('#idU').data('id');
 
     // Ir por la lista de Nuevos Diseños.
-    var uri = global.uriBasePanel + '/'+idDiseniador+'/get-tds/'+tipoGet+'/';
+    if(tipoGet  != 'edit') {
+      var uri = global.uriBasePanel + '/'+idDiseniador+'/get-tds/'+tipoGet+'/';
+    }else{
+      var palabra = $('#txtPalClaBuskr').val();
+      palabra = palabra.toLowerCase();
+      if(palabra.length == 0){
+        $('#modalLstSolicitudesDisenio').modal('hide');
+        alert('Nada haz indicado para buscar!!');
+        return false;
+      }
+      var uri = global.uriBasePanel + '/'+idDiseniador+'/get-tds/'+palabra+'/';
+    }
+
     http('GET', uri, function(data){
 
       var tmpl = $.templates('#lstTdsNews');
@@ -58,6 +74,94 @@ $(document).ready(function(){
     modal.find('#dowloadFoto').attr('href', uri);
   });
 
+  /// fnc ModalEditarData
+  $('#modalEditData').on('shown.bs.modal', function (event) {
+
+    var modal = $(this);
+    var button = $(event.relatedTarget);
+
+    campo = button.data('campo');
+
+    // Evitar editar los campos de Whatsapp y telefonofijo
+    if(campo == 'link') {
+      var txtMsg = 'Para editar el __linkTel__, hazlo por favor, desde la sección de "DATOS DE CONTACTO".';
+
+      if(button.data('valor').indexOf('wa.me') != -1){
+        $('#modalEditData').modal('hide');
+        alert(txtMsg.replace('__linkTel__', 'WHATSAPP'));
+        return false;
+      }
+      if(button.data('valor').indexOf('tel:') != -1){
+        $('#modalEditData').modal('hide');
+        alert(txtMsg.replace('__linkTel__', 'TELÉFONO FIJO'));
+        return false;
+      }
+      linkOld = button.data('valor');
+    }else{
+      linkOld = '0';
+    }
+
+    modal.find('#txtEditarData').val(button.data('valor'));
+    modal.find('#txtDataOld').text(button.data('valor'));
+    modal.find('.modal-title').text('EDITAR ' + button.data('titulo'));
+    var hasMsg = getMsgSegunCampo(button.data('campo'));
+    if(button.data('campo') == 'nombreEmpresa') {
+      modal.find('#changeNombreFile').removeClass('d-none');
+    }
+    if(hasMsg.length > 0) {
+      modal.find('#msgEdit').removeClass('d-none');
+      modal.find('#txtNotaWarning').text(hasMsg);
+    }
+
+    // Encendemos el submit del frm.
+    modal.find('#frmEditData').submit(function(e){
+      e.preventDefault();
+      modal.find('#btnEditAccion').trigger('click');
+      e.stopImmediatePropagation();
+    });
+
+    //Enccendemos el boton para editar.
+    modal.find('#btnEditAccion').on('click', function(e){
+      e.preventDefault();
+
+      var data = {
+        'idTd' : $('#getIdTarjeta').data('idtd'),
+        'campo': campo,
+        'changeSlug': $('#changeNombreFile').find('input').prop('checked'),
+        'valor': $('#txtEditarData').val(),
+      };
+      if(linkOld != '0') {
+        data['linkOld'] = linkOld;
+      }
+
+      ediatarCampo(data);
+      $('#modalEditData').modal('hide');
+      e.stopImmediatePropagation();
+    });
+
+  });
+
+  /// fnc ModalEditarData
+  $('#modalEditData').on('hide.bs.modal', function (event) {
+    var modal = $(this);
+    if(!modal.find('#msgEdit').hasClass('d-none')){
+      modal.find('#msgEdit').addClass('d-none');
+    }
+    if(!modal.find('#changeNombreFile').hasClass('d-none')){
+      modal.find('#changeNombreFile').addClass('d-none');
+    }
+    $('#changeNombreFile').find('input').prop('checked', false);
+    modal.find('#txtNotaWarning').text('...');
+    modal = undefined;
+  });
+
+  /// formulario de busqueda.
+  $('#frmBuskr').submit(function(e){
+    e.preventDefault();
+    $('#btnBuskr').trigger('click');
+    e.stopImmediatePropagation();
+  });
+
   /// terminar el diseño
   $('#terminarProceso').click(function(e){
     e.preventDefault();
@@ -73,19 +177,101 @@ $(document).ready(function(){
     var idDisenio = $('#contenedorDelPanel').find('#idDisSelect').data('iddis');
 
     var uri = global.uriBasePanel + '/terminar-proceso-disenio/';
-    var load = '<div class="text-center"><div class="spinner-border text-warning" role="status"></div> <small class="d-block text-light">Terminando</small></div>';
-    $('#containerMain').block({ message: load, css: { border:'none', backgroundColor:'transparent' }});
+    _bloquearAllScreen('Terminando');
 
-    http('POST', uri, function(data){
-      if(!data['abort']){
-        window.location.href = window.location.href;
-      }else{
-        $('#containerMain').unblock();
-        alert(data['body']);
-      }
-    }, {'id':idDisenio}); //fin del HTTP.
+    if(idDisenio.length == 0) {
+      window.location.href = window.location.href;
+    }else{
+      http('POST', uri, function(data){
+        if(!data['abort']){
+          window.location.href = window.location.href;
+        }else{
+          $('#containerMain').unblock();
+          alert(data['body']);
+        }
+      }, {'id':idDisenio}); //fin del HTTP.
+    }
     e.stopImmediatePropagation();
   });
+
+
+  // ---------------------- FUNCIONES ---------------------- //
+
+  /// Editar los datos de la pantalla.
+  function ediatarCampo(dataEdit) {
+
+    _bloquearAllScreen('Editando...');
+
+    var uri = global.uriBasePanel + '/editar-data-tarjeta/';
+    http('POST', uri, function(data){
+
+      if(data.hasOwnProperty('abort')){
+
+        if(!data['abort']) {
+          var idTarjeta = data['body']['id'];
+          if(data['body'].hasOwnProperty('nombreFileNew')){
+            _bloquearAllScreen('Archivo PDF...');
+            // Cambiar el nombre del Archivo PDF
+            var uri = global.uriBaseSelf + '/bcmx/tds/panel/' + data['body']['nombreFileNew'] + '/cambiar-nombre-file/' + data['body']['nombreFileOld'] + '/';
+            $.ajax(
+              {url: uri, type: "POST", dataType: "json", crossDomain : true, cache: false, contentType: false, processData: false},
+            ).done(function(data){
+                getDataTarjetaById(idTarjeta);
+              }
+            );
+          }else{
+            getDataTarjetaById(idTarjeta);
+          }
+        }else{
+          $('#containerMain').unblock();
+          alert(data['body']);
+        }
+      }else{
+        $('#containerMain').unblock();
+        alert('Ocurrio un error inesperado, por favor inténtalo nuevamente.');
+      }
+    }, dataEdit);
+
+  }
+
+  /// Buscamos los datos de la tarjeta por su ID.
+  function getDataTarjetaById(idTarjeta) {
+
+    var uri = global.uriBasePanel + '/' + idTarjeta + '/get-tarjeta-by-id/';
+    http('GET', uri, function(data){
+      printTarjetaInScreen(data[0]);
+      $('#containerMain').unblock();
+    });
+  }
+
+  /// tomamos lo mensajes antes de editar un campo.
+  function getMsgSegunCampo(campo) {
+
+      var msgParaLinks = 'Si cambias __link__, será necesario cambiar también los links que colocas en '+
+      'el archivo PDF que entregas al cliente. ¿Estás segur@ de querer hacer el cambio?.';
+
+      switch (campo) {
+        case 'nombreEmpresa':
+          return '¿Estás segur@ de cambiar el "Nombre de La Empresa"?, ésto hará que cambie el nombre del Archivo '+
+          'de la Tarjeta Digital y a su ves, el QR ya generado.';
+          break;
+        case 'whatsapp':
+          msgParaLinks = msgParaLinks.replace('__link__', 'el WHATSAPP');
+          return msgParaLinks;
+          break;
+        case 'telfijo':
+          msgParaLinks = msgParaLinks.replace('__link__', 'el NÚMERO FIJO');
+          return msgParaLinks;
+          break;
+        case 'link':
+          msgParaLinks = msgParaLinks.replace('__link__', 'el LINK SELECCIONADO');
+          return msgParaLinks;
+          break;
+
+        default:
+          return '';
+      }
+  }
 
   /// Colocar la data del diseño seleccionado en el modal dentro del panel.
   function printTarjetaInScreen(dataTd) {
@@ -127,9 +313,12 @@ $(document).ready(function(){
     });
 
     if(dataTd['em_id'] > 0){
+
       dataTd = {'nombreFile':dataTd['td_td']};
       _printDataDisenioTomado(dataTd);
+
     }else{
+
       // Click para tomar el diseño de la digital
       $(idContenedor).find('#takeDisenio').on('click', function(e){
         e.preventDefault();
@@ -145,11 +334,11 @@ $(document).ready(function(){
     }
   }
 
-  /// nombreFile
+  ///
   function _tomarDisenio(data) {
 
     $('#msgTdGral').text('Archivo PDF aún Inexistente.');
-    data['idDiseniador'] = $('#idU').data('id');
+    data['idDiseniador'] = idDiseniador;
     // Marcamos cantidades
     var cantNuevos = $('#setCantNews').text();
     cantNuevos = parseInt(cantNuevos) - 1;
@@ -206,16 +395,23 @@ $(document).ready(function(){
     objLinkDownload = undefined;
 
     // Ir por el QR pequeño.
+    generarQRAndPrintScreen(data['nombreFile']);
+    data = undefined;
+  }
+
+  /// Generamos el QR y lo imprimimos en pantalla.
+  function generarQRAndPrintScreen(nombreFile) {
+
     var uri = $('#contenedorDelPanel').data('genqr');
-    uri = uri.replace('__uri__', data['nombreFile']);
-    var noF = data['nombreFile'];
+    uri = uri.replace('__uri__', nombreFile);
+
     http('GET', uri, function(data){
+
       var img = $('<img/>').attr('src', data['qr']).css({'height':200});
       $('#contenedorDelPanel').find('#containerQrPeq').html(img);
-      _determinarTitulo(noF);
+      _determinarTitulo(nombreFile);
       data = undefined;
     });
-    data = undefined;
   }
 
   ///
@@ -253,6 +449,9 @@ $(document).ready(function(){
   ///
   function _colocarImagenes(contenedor, imagenes) {
 
+    if(imagenes == undefined) {
+      imagenes = new Array();
+    }
     var totImg = 4;
     var lstFotos = new Array();
 
@@ -289,16 +488,6 @@ $(document).ready(function(){
     $temp.remove();
   }
 
-  /// Ir por las cantidades de diseños nuevos y los que tiene el diseñador acualmente
-  function _getCantidades() {
-
-    http('GET', global.uriBasePanel + '/' + $('#idU').data('id') +'/get-cant-tds/', function(data){
-      $('#setCantNews').html(data['nuevos']);
-      $('#setCantMios').html(data['mios']);
-      data = undefined;
-    });
-  }
-
   /// Vemos si existe el PDF en fisico del registro visualizado
   function _determinarTitulo(nombreFile) {
 
@@ -323,4 +512,20 @@ $(document).ready(function(){
     return;
   }
 
-});
+  /// Bloqueamos toda la pantalla
+  function _bloquearAllScreen(msg) {
+    var load = '<div class="text-center"><div class="spinner-border text-warning" role="status"></div> <small class="d-block text-light">'+msg+'</small></div>';
+    $('#containerMain').block({ message: load, css: { border:'none', backgroundColor:'transparent' }});
+  }
+
+  /// Ir por las cantidades de diseños nuevos y los que tiene el diseñador acualmente
+  function _getCantidades() {
+
+    http('GET', global.uriBasePanel + '/' + idDiseniador +'/get-cant-tds/', function(data){
+      $('#setCantNews').html(data['nuevos']);
+      $('#setCantMios').html(data['mios']);
+      data = undefined;
+    });
+  }
+
+}); // fin de la carga del documento JQuery

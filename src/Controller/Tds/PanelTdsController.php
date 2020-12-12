@@ -58,6 +58,23 @@ class PanelTdsController extends AbstractController
     }
 
     /**
+    * @Route("{filenameNew}/cambiar-nombre-file/{filenameOld}/", methods={"POST"}, name="tds_panel-cambiarNombreFile")
+    */
+    public function cambiarNombreFile(string $filenameNew, string $filenameOld)
+    {
+      $result = ['abort' => false];
+      $base = $this->getParameter('pathUpPdfs');
+      $fuente = $base . '/' . $filenameOld;
+      $destino = $base . '/' . $filenameNew;
+      if(is_file($fuente)) {
+          rename($fuente, $destino);
+      }else{
+        $result['abort'] = true;
+      }
+      return $this->json($result);
+    }
+
+    /**
     * @Route("{filename}/upload-pdf-final/", name="tds_panel-upload_pdf_final")
     */
     public function uploadPdf(Request $req, string $filename)

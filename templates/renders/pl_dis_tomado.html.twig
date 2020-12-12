@@ -1,8 +1,9 @@
-<small class="d-block mt-3 text-muted">Nombre del Archivo:</small>
+{% apply spaceless %}
+<div class="d-flex">
+  <a href="#" id="copiarNombreFile" data-url="<%:nombreFile %>"><i class="far fa-copy text-warning" style="font-size: 0.8rem;"></i></a>
+  <small class="ml-2 text-muted">Nombre del Archivo:</small>
+</div>
 <span class="d-block"> <%:~nombreCut(nombreFile) %> </span>
-<small class="d-block text-right">
-  <a href="#" id="copiarNombreFile" data-url="<%:nombreFile %>">Copiar Nombre</a>
-</small>
 
 <div class="text-center">
   <div id="containerQrPeq">...</div>
@@ -12,3 +13,4 @@
 <div id="containerFrmUp" class="mt-2">
   {{ render(controller('App\\Controller\\Tds\\PanelTdsController::getFrmUploadPdf')) }}
 </div>
+{% endapply %}

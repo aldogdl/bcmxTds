@@ -1,13 +1,6 @@
-<!-- <form class="mt-2" action="index.html" method="post">
-  <div class="input-group mb-3">
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-      <label class="custom-file-label" for="inputGroupFile01">PDF...</label>
-    </div>
-  </div>
-  <button class="btn btn-success btn-sm badge-pill px-2 btn-block" href="#" target="_blank">Subir PDF</button>
-</form> -->
+{% apply spaceless %}
 {{ form_start(frm, { 'attr':{'id':'frmUpPdf'} }) }}
     {{ form_row(frm.archivo) }}
     <button type="submit" class="btn btn-success btn-sm badge-pill px-2 btn-block">Subir PDF</button>
 {{ form_end(frm) }}
+{% endapply %}

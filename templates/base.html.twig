@@ -10,7 +10,7 @@
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body id="getEnv" data-env="{{ env }}">
         {% block body %}{% endblock %}
         <span id="login" data-base="{{ path('security') }}"></span>
         {{ encore_entry_script_tags('jqblock') }}

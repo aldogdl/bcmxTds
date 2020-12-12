@@ -25,6 +25,50 @@
   </div>
 </div>
 
+<div class="modal fade" id="modalEditData" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalEditDataLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditDataLabel">Editar Datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <form id="frmEditData" class="row align-items-center mx-2">
+          <div class="col-12">
+            <div class="input-group">
+              <input type="text" class="form-control" id="txtEditarData" value="">
+            </div>
+            <small class="d-block text-right form-text text-muted" id="txtDataOld">...</small>
+          </div>
+        </form>
+
+        <div id="msgEdit" class="d-none">
+
+          <div class="alert alert-warning">
+            NOTA IMPORTANTE
+          </div>
+          <p id="txtNotaWarning">...</p>
+
+          <div id="changeNombreFile" class="form-check bg-danger my-2 d-none py-2">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label text-white font-weight-bold" for="flexCheckDefault">
+              Cambiar Nombre del Archivo
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnEditAccion" class="btn btn-primary">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="modalDownloadFotoDisenio" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalDownloadFotoDisenioLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -45,56 +89,74 @@
   </div>
 </div>
 
-<div class="container p-5" id="containerMain">
+<div class="container px-5 pt-3" id="containerMain">
 
     <section class="row">
       <article class="col">
         <div class="bg-white rounded p-3">
-          <aside class="row p-3">
+          <aside class="row d-flex p-3">
 
-            <a href="{{ path('bcmx_cpanel-index') }}" class="btn btn-dark badge-pill">
-              <i class="fas fa-arrow-left pt-1" style="font-size: 1.8rem;"></i>
-            </a>
+            <div>
+              <a href="{{ path('bcmx_cpanel-index') }}" class="btn btn-dark badge-pill">
+                <i class="fas fa-arrow-left pt-1" style="font-size: 1.8rem;"></i>
+              </a>
+            </div>
 
-            <button class="btn btn-primary d-flex badge-pill mx-3" type="button" data-tipo="nuevos" data-titulo="Lista de Diseños Nuevos" data-toggle="modal" data-target="#modalLstSolicitudesDisenio">
-              <span style="font-size: 1.2rem;" class="mr-2 d-block pt-1 px-2">BANDEJA </span>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-bell" style="font-size: 1.8rem;"></i>
-                <div>
-                    <span id="setCantNews" class="badge badge-pill badge-danger">
-                      <div style="width: 15px; height:15px" class="spinner-border text-light" role="status"></div>
-                    </span>
+            <div>
+              <button class="btn btn-primary d-flex badge-pill mx-3" type="button" data-tipo="nuevos" data-titulo="Lista de Diseños Nuevos" data-toggle="modal" data-target="#modalLstSolicitudesDisenio">
+                <span style="font-size: 1.2rem;" class="mr-2 d-block pt-1 px-2">BANDEJA </span>
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-bell" style="font-size: 1.8rem;"></i>
+                  <div>
+                      <span id="setCantNews" class="badge badge-pill badge-danger">
+                        <div style="width: 15px; height:15px" class="spinner-border text-light" role="status"></div>
+                      </span>
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </div>
 
-            <button class="btn btn-success d-flex badge-pill" type="button" data-tipo="mios" data-titulo="Lista de Mis Diseños" data-toggle="modal" data-target="#modalLstSolicitudesDisenio">
-              <span style="font-size: 1.2rem;" class="mr-2 d-block pt-1 px-2">MIS DISEÑOS </span>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-clipboard-list" style="font-size: 1.8rem;"></i>
-                <div>
-                    <span id="setCantMios" class="badge badge-pill badge-danger ml-1">
-                      <div style="width: 15px; height:15px" class="spinner-border text-light" role="status"></div>
-                    </span>
+            <div>
+              <button class="btn btn-success d-flex badge-pill" type="button" data-tipo="mios" data-titulo="Lista de Mis Diseños" data-toggle="modal" data-target="#modalLstSolicitudesDisenio">
+                <span style="font-size: 1.2rem;" class="mr-2 d-block pt-1 px-2">MIS DISEÑOS </span>
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-clipboard-list" style="font-size: 1.8rem;"></i>
+                  <div>
+                      <span id="setCantMios" class="badge badge-pill badge-danger ml-1">
+                        <div style="width: 15px; height:15px" class="spinner-border text-light" role="status"></div>
+                      </span>
+                  </div>
                 </div>
+              </button>
+            </div>
+
+            <form id="frmBuskr" class="row align-items-center mx-2">
+              <div class="col-12">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="txtPalClaBuskr" placeholder="PIZARRA DE DISEÑO">
+                  <button type="button" id="btnBuskr" data-tipo="edit" data-toggle="modal" data-target="#modalLstSolicitudesDisenio" class="btn btn-primary ml-2"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+                <div class="form-text text-muted">Busca Tarjetas por medio de palabras claves para edición</div>
               </div>
-            </button>
+            </form>
 
-            <h2 class="p-0 m-0 ml-5 font-weight-bold text-primary">PIZARRA DE DISEÑO</h2>
-
-            <a id="terminarProceso" href="{{ path('bcmx_cpanel-index') }}" class="btn btn-success badge-pill ml-auto d-none">
-              <i class="fas fa-check-double pt-1" style="font-size: 1.8rem;"></i>
-            </a>
+            <div>
+              <a id="terminarProceso" href="{{ path('bcmx_cpanel-index') }}" class="btn btn-success badge-pill ml-auto d-none">
+                <i class="fas fa-check-double pt-1" style="font-size: 1.8rem;"></i>
+              </a>
+            </div>
           </aside>
-          <hr class="m-0 p-0 mt-3">
-          <div class="text-right mb-3">
+
+          <div class="text-right">
             <small id="msgTdGral" class="d-block p-0 m-0 text-danger font-weight-bold">Selecciona un Diseño para procesar</small>
           </div>
+          <hr class="m-0 p-0 mt-1 mb-3">
+
           <span id="getPathToUpPdf" data-url="{{ path('tds_panel-upload_pdf_final', {'filename':'__url__'}) }}"></span>
           <span id="getPathasPdf" data-url="{{ path('tds_panel-checkPDFExiste', {'filename':'__uri__'}) }}"></span>
           <aside class="row px-2" id="contenedorDelPanel" data-genqr="{{ path('tds_panel-getQrPeq', {'uri': '__uri__'}) }}"> </aside>
           <span id="toS" data-info="{{ app.session.get('tokenServer')}}"></span>
-          <span id="idU" data-id="{{ app.session.get('dataUser')['u_id'] }}"></span>
+          <span id="idU" data-iduser="{{ app.session.get('dataUser')['u_id'] }}"></span>
         </div>
       </article>
     </section>

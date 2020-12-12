@@ -1,18 +1,31 @@
-<div class="col-3 bg-light">
+{% apply spaceless %}
+<div class="col-3 bg-light" data-idtd="<%:td_id %>" id="getIdTarjeta">
   <h6 class="font-weight-bold">Datos de Contacto</h6>
   <hr>
   <small class="d-block text-muted">Nombre de la Empresa</small>
-  <span ><%:td_nombreEmpresa %></span>
+  <span>
+    <a class="editText text-dark" data-extra="changeQr" data-campo="nombreEmpresa" data-titulo="Nombre de la Empresa" data-valor="<%:td_nombreEmpresa %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:td_nombreEmpresa %></a>
+  </span>
   <small class="d-block mt-3 text-muted">Nombre del Cliente</small>
-  <span class="d-block"><%:us_nombre %></span>
+  <span class="d-block">
+    <a class="editText text-dark" data-extra="none" data-campo="nombre" data-titulo="Nombre del Cliente" data-valor="<%:us_nombre %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:us_nombre %></a>
+  </span>
   <small class="d-block mt-3 text-muted">Número de Celular:</small>
-  <span class="d-block"><%:td_whatsapp %></span>
+  <span class="d-block">
+    <a class="editText text-dark" data-extra="links" data-campo="whatsapp" data-titulo="Número de Celular" data-valor="<%:td_whatsapp %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:td_whatsapp %></a>
+  </span>
   <small class="d-block mt-3 text-muted">Número Fijo:</small>
-  <span class="d-block"><%:td_telfijo %></span>
+  <span class="d-block">
+    <a class="editText text-dark" data-extra="links" data-campo="telfijo" data-titulo="Número Fijo" data-valor="<%:td_telfijo %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:td_telfijo %></a>
+  </span>
   <small class="d-block mt-3 text-muted">Giro de la Empresa</small>
-  <span class="d-block"><%:td_giro %></span>
+  <span class="d-block">
+    <a class="editText text-dark" data-extra="none" data-campo="giro" data-titulo="Giro de la Empresa" data-valor="<%:td_giro %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:td_giro %></a>
+  </span>
   <small class="d-block mt-3 text-muted">Que Vende</small>
-  <span class="d-block"><%:~orderQueVende(td_queVende) %></span>
+  <span class="d-block">
+    <a class="editText text-dark" data-extra="none" data-campo="queVende" data-titulo="Que Vende" data-valor="<%:td_queVende %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:~orderQueVende(td_queVende) %></a>
+  </span>
 </div>
 
 <div class="col-3" id="idDisSelect" data-iddis="<%:ds_id %>">
@@ -36,15 +49,18 @@
   <h6 class="font-weight-bold">Link a Adicionar</h6>
   <hr>
   <%for td_lstLinks %>
+
     <div class="bg-ligth">
       <div class="d-felx">
+        <a href="#" id="copyar<%:#getIndex() %>" data-url="<%:urlCliente %>"><i class="far fa-copy text-warning" style="font-size: 0.8rem;"></i></a>
+        <span class="mr-2">&nbsp;<%:value %></span>
         <%if value %>
-          <i class="fas fa-check text-primary"></i>
+          <i class="fas fa-check text-primary" style="font-size: 0.7rem;"></i>
         <%/if %>
-        <span class="mr-2"><%:value %></span>
-        <a href="#" id="copyar<%:#getIndex() %>" data-url="<%:urlCliente %>">copiar</a>
       </div>
-      <small class="d-block mb-3 text-success"><%:~cortarTxt(urlCliente) %></small>
+      <small class="d-block mb-3">
+        <a class="editText text-success" data-extra="none" data-campo="link" data-titulo="Link de Contacto" data-valor="<%:urlCliente %>" data-toggle="modal" data-target="#modalEditData" href="#"><%:~cortarTxt(urlCliente) %></a>
+      </small>
     </div>
   <%/for %>
 </div>
@@ -60,7 +76,12 @@
     <small class="d-block">Procesando</small>
   </div>
   <small class="d-block mt-3 text-muted">Vendido por:</small>
-  <span class="d-block"><%:v_nombre %></span>
+  <%if v_nombre %>
+    <span class="d-block"><%:v_nombre %></span>
+  <%else %>
+    <span class="d-block"><%:em_nombre %></span>
+  <%/if%>
+
   <div class="mt-2" id="disTomadoContainer">
     <p>
       <small class="d-block text-muted p-2">
@@ -71,3 +92,4 @@
     </p>
   </div>
 </div>
+{% endapply %}
