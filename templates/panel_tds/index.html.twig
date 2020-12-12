@@ -53,9 +53,9 @@
           <p id="txtNotaWarning">...</p>
 
           <div id="changeNombreFile" class="form-check bg-danger my-2 d-none py-2">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" id="flexCheckDefault" checked>
             <label class="form-check-label text-white font-weight-bold" for="flexCheckDefault">
-              Cambiar Nombre del Archivo
+              Cambiar también el Nombre del Archivo PDF
             </label>
           </div>
         </div>
@@ -147,8 +147,9 @@
             </div>
           </aside>
 
-          <div class="text-right">
-            <small id="msgTdGral" class="d-block p-0 m-0 text-danger font-weight-bold">Selecciona un Diseño para procesar</small>
+          <div class="d-flex">
+            <small class="badge badge-danger text-white font-weight-bold mr-auto">Diseñado por: <span id="msgTdDis" data-iddis="0">...</span> </small>
+            <small id="msgTdGral" class="d-block p-0 m-0 text-danger font-weight-bold ml-auto">Selecciona un Diseño para procesar</small>
           </div>
           <hr class="m-0 p-0 mt-1 mb-3">
 

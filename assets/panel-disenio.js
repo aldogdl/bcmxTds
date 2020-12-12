@@ -9,6 +9,7 @@ $(document).ready(function(){
 
   var global = globals('getGlobals');
   var idDiseniador = $('#idU').data('iduser');
+
   _getCantidades();
 
   /// fnc ModalGetTdsNewsMys
@@ -76,6 +77,19 @@ $(document).ready(function(){
 
   /// fnc ModalEditarData
   $('#modalEditData').on('shown.bs.modal', function (event) {
+
+    // Evitamos que alguien que no sea el diseñador que hizo la tarjeta puede editar campos
+    if($('#msgTdDis').data('iddis') != '0') {
+      if(idDiseniador != $('#msgTdDis').data('iddis')) {
+        $('#modalEditData').modal('hide');
+        alert('Lo sentimos pero sólo ' + $('#msgTdDis').text() + ', puede hacer cambios en los datos de esta tarjeta');
+        return false;
+      }
+    }else{
+      $('#modalEditData').modal('hide');
+      alert('Para Editar datos de la tarjeta, primeramente debes "TOMAR EL DISEÑO"');
+      return false;
+    }
 
     var modal = $(this);
     var button = $(event.relatedTarget);
@@ -165,6 +179,12 @@ $(document).ready(function(){
   /// terminar el diseño
   $('#terminarProceso').click(function(e){
     e.preventDefault();
+
+    if(idDiseniador != $('#msgTdDis').data('iddis')) {
+      alert('Lo sentimos pero sólo ' + $('#msgTdDis').text() + ', puede terminar el proceso de este diseño.');
+      return false;
+    }
+
     var titPage = $('#msgTdGral').text();
     if(titPage.indexOf('buscomex') == -1) {
       alert('No se ha detectado un PDF terminado, asegurate de ello antes de terminar el proceso por favor..');
@@ -297,6 +317,11 @@ $(document).ready(function(){
       }
     };
 
+    if(dataTd['em_id'] == null) {
+      $('#msgTdDis').text('Sin selección aún...').data('iddis', '0');
+    }else{
+      $('#msgTdDis').text(dataTd['em_nombre']).data('iddis', dataTd['em_id']);
+    }
     var tmpl = $.templates('#panelDisenio');
     var idContenedor = '#contenedorDelPanel';
     $(idContenedor).html(tmpl.render(dataTd, acciones));
@@ -416,6 +441,11 @@ $(document).ready(function(){
 
   ///
   function _subirPDFinal(frmPdf) {
+
+    if(idDiseniador != $('#msgTdDis').data('iddis')) {
+      alert('Lo sentimos pero sólo ' + $('#msgTdDis').text() + ', puede subir el Archivo PDF final.');
+      return false;
+    }
 
     var htmlCargando = $.templates('#cargando');
     var htmlFrm = $('#containerFrmUp').html();
