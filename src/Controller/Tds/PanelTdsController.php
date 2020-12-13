@@ -31,6 +31,24 @@ class PanelTdsController extends AbstractController
     }
 
     /**
+     * @Route("crear-imgs-from-pdfs/", methods={"GET"}, name="tds_panel-crearImgFromPdf")
+     */
+    public function crearImgFromPdf(SeguridadService $session): Response
+    {
+        if(!$session->hasToken()) { return $this->redirectToRoute('security'); }
+        $finder = new Finder();
+        $finder->files()->in($this->getParameter('pathUpPdfs'))->name('*.pdf');
+
+        if($finder->hasResults()){
+          foreach ($finder as $file) {
+            $fileNameWithExtension = $file->getRelativePathname();
+            $this->pdfToImg($fileNameWithExtension);
+          }
+        }
+        return $this->json(['result' => 'Listo!!']);
+    }
+
+    /**
     * Generamos el formulario para subir el PDF
     */
     public function getFrmUploadPdf()
@@ -61,8 +79,9 @@ class PanelTdsController extends AbstractController
     /**
     * @Route("{filename}/upload-pdf-final/", name="tds_panel-upload_pdf_final")
     */
-    public function uploadPdf(Request $req, string $filename)
+    public function uploadPdf(SeguridadService $session, Request $req, string $filename)
     {
+      if(!$session->hasToken()) { return $this->redirectToRoute('security'); }
       $obj = new ArchPdf();
       $frm = $this->createForm(ArchPdfType::class, $obj);
       $frm->handleRequest($req);
@@ -90,8 +109,9 @@ class PanelTdsController extends AbstractController
     /**
     * @Route("{filenameNew}/cambiar-nombre-file/{filenameOld}/", methods={"POST"}, name="tds_panel-cambiarNombreFile")
     */
-    public function cambiarNombreFile(string $filenameNew, string $filenameOld)
+    public function cambiarNombreFile(SeguridadService $session, string $filenameNew, string $filenameOld)
     {
+      if(!$session->hasToken()) { return $this->redirectToRoute('security'); }
       $result = ['abort' => false];
       $base = $this->getParameter('pathUpPdfs');
       $fuente = $base . '/' . $filenameOld;
