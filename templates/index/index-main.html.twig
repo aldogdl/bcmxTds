@@ -3,8 +3,22 @@
 {% block title %}Panel BCMX{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>En Construccion</h1>
+<div class="container-fluid" style="height: 100vh;">
+  <section class="row d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container w-25 text-center">
+      <section class="row">
+        <article class="col">
+          <img src="{{ asset('images/buscomex.png') }}" alt="logo-buscomex">
+          <hr class="border border-primary">
+        </article>
+      </section>
+      <section class="row">
+
+        <h5 class="d-block text-center m-auto pt-2">Buscador de Comercios OnLine en México</h5>
+        <small class="d-block m-auto text-center">Derechos Reservados Buscomex&copy; <a href="{{ path('bcmx_cpanel-index') }}" rel="nofollow">panel</a> </small>
+      </section>
+    </div>
+  </section>
 
 </div>
 {% endblock %}

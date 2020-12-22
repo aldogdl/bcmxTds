@@ -117,7 +117,18 @@ class PanelTdsController extends AbstractController
       $fuente = $base . '/' . $filenameOld;
       $destino = $base . '/' . $filenameNew;
       if(is_file($fuente)) {
+          // cambiar nombre del archivo pdf
           rename($fuente, $destino);
+
+          $base = $this->getParameter('pathThumTds');
+          $filenameOld = str_replace('.pdf', '.jpg', $filenameOld);
+          $filenameNew = str_replace('.pdf', '.jpg', $filenameNew);
+          $fuente = $base . '/' . $filenameOld;
+          $destino = $base . '/' . $filenameNew;
+          // cambiar nombre del archivo jpg
+          if(is_file($fuente)) {
+              rename($fuente, $destino);
+          }
       }else{
         $result['abort'] = true;
       }

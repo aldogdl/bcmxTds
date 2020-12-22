@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel BCMX{% endblock %}
+
+{% block body %}
+
+<main class="container-fluid">
+
+  <section class="row">
+    <article class="col d-flex align-items-center" style="height: 50px; background-color: #0070B3;">
+      <h3 class="text-light"> <small> Cpanel  de </small> <a class="text-warning text-decoration-none" href="{{ path('bcmx_cpanel-index') }}">Buscomex</a> </h3>
+    </article>
+  </section>
+  <section class="row">
+    <article class="col p-3 border-bottom border-white" style="background-color: #ccc;">
+      <h5 class="d-block p-0 m-0">Bienvenido! <strong>{{ app.session.get('dataUser')['u_username'] }}</strong> </h5>
+      <div class="d-flex">
+        <small class="d-block mr-4">Tu Categoría: <b>{{ app.session.get('dataUser')['u_roles'] }}</b> </small>
+        <small class="d-block mr-4">Identificador: <b>{{ app.session.get('dataUser')['u_id'] }}</b> </small>
+        <small class="d-block">Estas en: <b>{{ estasEn }}</b> </small>
+      </div>
+    </article>
+  </section>
+  <section class="row">
+    <article class="col-2 bg-white py-2" style="height:83vh;">
+
+      <div class="border rounded p-2 mb-2">
+        <h6 style="color: #0070B3;"> <b>Generales</b> </h6>
+        <hr class="p-0 m-0 mb-2">
+        <a class="btn btn-sm btn-block text-muted text-left" href="{{ path('generales_franquicias-index') }}"> <i class="far fa-id-card mr-2"></i>Franquicias</a>
+        <a class="btn btn-sm btn-block text-muted text-left" href="{{ path('generales_categorias-index') }}"> <i class="fas fa-industry mr-2"></i>Categorías</a>
+        <a class="btn btn-sm btn-block text-muted text-left" href="{{ path('generales_localidades-index') }}"> <i class="fas fa-industry mr-2"></i>Localidades</a>
+        <a class="btn btn-sm btn-block text-muted text-left" href="{{ path('generales_usuarios-index') }}"> <i class="fas fa-user-cog mr-2"></i>Gestion Usuarios</a>
+        <hr>
+        <a class="btn btn-sm btn-block text-danger text-left" href="{{ path('security-cerrar-sesion') }}"> <i class="fas fa-user-lock mr-2"></i>Cerrar Sesión</a>
+      </div>
+
+      <div class="border rounded p-2 mb-2">
+        <h6 style="color: #0070B3;"> <b>Tarjetas Digitales</b> </h6>
+        <hr class="p-0 m-0 mb-2">
+        <a class="btn btn-sm btn-block text-muted text-left" href="{{ path('tds_panel-index') }}"> <i class="fas fa-palette mr-2"></i>Panel de Diseño</a>
+        <a class="btn btn-sm btn-block text-muted text-left" href="{{ path('tds-index') }}"> <i class="far fa-id-card mr-2"></i>Listar Tarjetas</a>
+      </div>
+
+      <div class="border rounded p-2 mb-2">
+        <h6 style="color: #0070B3;"> <b>Acciones Administrativas</b> </h6>
+        <hr class="p-0 m-0 mb-2">
+        <a class="btn btn-sm btn-block text-muted text-left" href="#"> <i class="far fa-id-card mr-2"></i>Metricas</a>
+      </div>
+    </article>
+
+    <article class="col-10 py-2">
+    {% block bodyContenedor %}   {% endblock %}
+    </article>
+  </section>
+</main>
+
+{% endblock %}

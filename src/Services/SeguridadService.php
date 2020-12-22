@@ -46,15 +46,26 @@ class SeguridadService {
     */
     public function getTokenInSession(): string
     {
-        return $this->session->get('tokenServer');
+        $token = $this->session->get('tokenServer');
+        return ($token == null) ? '' : $token;
     }
 
     /**
-     * 
+     *
     */
     public function hasToken(): bool
     {
         $token = $this->getTokenInSession();
         return (strlen($token) > 20) ? true : false;
+    }
+
+    /**
+     *
+    */
+    public function cerrarSession(): bool
+    {
+        $this->session->remove('tokenServer');
+        $this->session->remove('dataUser');
+        return true;
     }
 }

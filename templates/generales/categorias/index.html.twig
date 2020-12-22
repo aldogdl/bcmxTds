@@ -1,0 +1,36 @@
+{% extends 'panel_base.html.twig' %}
+
+{% block title %}Categorias{% endblock %}
+{% block bodyContenedor %}
+
+  <section class="row">
+    <article class="col">
+
+      <section class="row">
+        <article class="col-5">
+          <h5 class="text-muted">Lista de Categorias.</h5>
+          <hr>
+          <div class="overflow-auto px-3" style="height:70vh;">
+            Hola a Todo el Equipazo
+          </div>
+        </article>
+        <article class="col-7 px-4">
+
+          <h5 class="text-muted">Alta de Nueva Categoria</h5>
+          <hr>
+          <div class="overflow-auto p-0" style="height:70vh;">
+            <form id="frmGestLocalidades" action="index.html" method="post">
+
+            </form>
+          </div>
+        </article>
+      </section>
+    </article>
+
+  </section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('localidades') }}
+{% endblock %}

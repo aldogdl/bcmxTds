@@ -11,8 +11,10 @@ Encore
     .setPublicPath('/build')
 
     .addEntry('app', './assets/app.js')
-    .addEntry('http', './assets/http.js')
-    .addEntry('panelDisenio', './assets/panel-disenio.js')
+    .addEntry('http', './assets/libs/http.js')
+    .addEntry('panelDisenio', './assets/tds/panel-disenio.js')
+    .addEntry('franq', './assets/generales/franq.js')
+    .addEntry('localidades', './assets/generales/localidades.js')
     .addEntry('jqblock', './assets/jquery.blockUI.js')
 
     .splitEntryChunks()

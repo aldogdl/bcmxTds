@@ -60,4 +60,13 @@ class SecurityController extends AbstractController
       'frm' => $frm->createView(), 'erroresExtras' => $erroresExtras
     ]);
   }
+
+  /**
+  * @Route("cerrar-sesion/", name="security-cerrar-sesion")
+  */
+  public function cerrarSesion(SeguridadService $session)
+  {
+      $session->cerrarSession();
+      return $this->redirectToRoute('security');
+  }
 }

@@ -17,10 +17,12 @@ class IndexController extends AbstractController
      * @Route("index", name="bcmx_cpanel-index")
      */
     public function index(SeguridadService $session): Response
-    {   
+    {
+        if(!$session->hasToken()) { return $this->redirectToRoute('security'); }
         $tokenServer = $session->getTokenInSession();
-        return $this->render('index/index.html.twig', [
+        return $this->render('index/index_panel.html.twig', [
             'tokenServer' => $tokenServer,
+            'estasEn' => 'Página Principal'
         ]);
     }
 }

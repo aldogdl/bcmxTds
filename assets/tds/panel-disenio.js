@@ -1,6 +1,6 @@
-import './app.js';
-import globals from './globals';
-import http from './http';
+import './../app.js';
+import globals from './../globals';
+import http from './../libs/http';
 
 $(document).ready(function(){
 
@@ -322,6 +322,7 @@ $(document).ready(function(){
     }else{
       $('#msgTdDis').text(dataTd['em_nombre']).data('iddis', dataTd['em_id']);
     }
+
     var tmpl = $.templates('#panelDisenio');
     var idContenedor = '#contenedorDelPanel';
     $(idContenedor).html(tmpl.render(dataTd, acciones));
