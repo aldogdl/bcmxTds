@@ -15,6 +15,8 @@ Encore
     .addEntry('panelDisenio', './assets/tds/panel-disenio.js')
     .addEntry('franq', './assets/generales/franq.js')
     .addEntry('localidades', './assets/generales/localidades.js')
+    .addEntry('categos', './assets/generales/categos.js')
+
     .addEntry('jqblock', './assets/jquery.blockUI.js')
 
     .splitEntryChunks()

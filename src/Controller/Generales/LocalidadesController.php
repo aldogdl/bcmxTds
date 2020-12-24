@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/generales/localidades/")
+ * @Route("/bcmx/generales/localidades/")
  */
 class LocalidadesController extends AbstractController
 {

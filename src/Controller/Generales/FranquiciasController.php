@@ -10,7 +10,7 @@ use App\Entity\Franquicias;
 use App\Form\FranquiciasType;
 
 /**
- * @Route("/generales/franquicias/")
+ * @Route("/bcmx/generales/franquicias/")
  */
 class FranquiciasController extends AbstractController
 {

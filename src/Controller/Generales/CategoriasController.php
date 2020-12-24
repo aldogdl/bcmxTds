@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/generales/categorias/")
+ * @Route("/bcmx/generales/categorias/")
  */
 class CategoriasController extends AbstractController
 {
