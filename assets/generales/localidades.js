@@ -27,6 +27,36 @@ $(document).ready(function(){
     }
   });
 
+  // Reiniciamos la pizarra para dar de alta nuevo pais.
+  $('#refreshScreen').click(function(e){
+    e.preventDefault();
+
+    $('#cantEdo').text('0');
+    $('#cantCds').text('0');
+    $('#cantCols').text('0');
+
+    $('#cjaEstados').html( _getSinElementos() );
+    $('#cjaCiudades').html( _getSinElementos() );
+    $('#cjaColonias').html( _getSinElementos() );
+    jsonLoc['pais'] = 0;
+    jsonLoc['edo'] = 0;
+    jsonLoc['cd'] = 0;
+    jsonLoc['col'] = 0;
+    jsonLoc['nombre'] = '0';
+    jsonLoc['act'] = 'add';
+    jsonLoc['elem'] = '0';
+    $('#nomPais').text('');
+    $('#nomEdo').text('');
+    $('#nomCd').text('');
+    var paises = $('input[id^=radio_pais]');
+    $.each(paises, function(i, e){
+      $(e).prop('checked', false);
+    });
+    $('#titQueAlta').text('Alta de Nuevo País');
+
+    e.stopImmediatePropagation();
+  });
+
   ///
   _getLocalidades('/get-paises/', 'cjaPaises');
 
@@ -180,7 +210,7 @@ function _isValidIds() {
     // Revisando Pais
     if(jsonLoc['pais'] == 0){
       jsonLoc['elem'] = 'pais';
-      return _isValidInputPais();
+      return true;
     }
 
     // Revisando Estados
