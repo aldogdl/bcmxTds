@@ -50,9 +50,13 @@
     </article>
 
     <article class="col-10 py-2">
-    {% block bodyContenedor %}   {% endblock %}
+      <div id="containerMain" >
+        {% block bodyContenedor %}   {% endblock %}
+      </div>
     </article>
   </section>
+  <span id="toS" data-info="{{ app.session.get('tokenServer')}}"></span>
+  <span id="idU" data-iduser="{{ app.session.get('dataUser')['u_id'] }}"></span>
 </main>
 
 {% endblock %}

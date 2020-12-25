@@ -368,12 +368,25 @@ function _addLocalidad() {
         return;
       }
 
-      if(jsonLoc['elem'] == 'pais'){ _getLocalidades('/get-paises/', 'cjaPaises'); }
-      if(jsonLoc['elem'] == 'edo'){ _getLocalidades('/' + jsonLoc['pais'] + '/get-edos/', 'cjaEstados'); }
-      if(jsonLoc['elem'] == 'cd'){ _getLocalidades('/' + jsonLoc['edo'] + '/get-ciudades/', 'cjaCiudades'); }
-      if(jsonLoc['elem'] == 'col'){ _getLocalidades('/' + jsonLoc['cd'] + '/get-colonias/', 'cjaColonias'); }
-      $('#txtNombreLoc').val('');
+      if(jsonLoc['elem'] == 'pais'){
+        $('#titQueAlta').text('Alta de Nuevo País');
+        _getLocalidades('/get-paises/', 'cjaPaises');
+      }
+      if(jsonLoc['elem'] == 'edo'){
+        $('#titQueAlta').text('Alta de Nuevo Estado');
+        _getLocalidades('/' + jsonLoc['pais'] + '/get-edos/', 'cjaEstados');
+      }
+      if(jsonLoc['elem'] == 'cd'){
+        $('#titQueAlta').text('Alta de Nueva Ciudad');
+        _getLocalidades('/' + jsonLoc['edo'] + '/get-ciudades/', 'cjaCiudades');
+      }
+      if(jsonLoc['elem'] == 'col'){
+        $('#titQueAlta').text('Alta de Nueva Colonia');
+        _getLocalidades('/' + jsonLoc['cd'] + '/get-colonias/', 'cjaColonias');
+      }
+
       jsonLoc['act'] = 'add';
+      $('#txtNombreLoc').val('');
     },
     jsonLoc
   )
@@ -408,7 +421,7 @@ function _Eliminar(elemento) {
   http(
     'get',
     global['uriBaseLocs'] + '/' + elemento.data('id') + '/' + elemento.data('tipo') + '/del-localidad/',
-    function(resp){
+    function(resp) {
       if(!resp['abort']) {
         elemento.parent().parent().parent().remove();
         _descontarContador( elemento.data('tipo') );
@@ -419,6 +432,28 @@ function _Eliminar(elemento) {
         }, 5000);
       }
       jsonLoc['act'] = 'add';
+      jsonLoc['nombre'] = '0';
+
+      if(jsonLoc['elem'] == 'pais'){
+        if(jsonLoc['pais'] == elemento.data('id')){
+          jsonLoc['pais'] = 0;
+        }
+      }
+      if(jsonLoc['elem'] == 'edo'){
+        if(jsonLoc['edo'] == elemento.data('id')){
+          jsonLoc['edo'] = 0;
+        }
+      }
+      if(jsonLoc['elem'] == 'cd'){
+        if(jsonLoc['cd'] == elemento.data('id')){
+          jsonLoc['cd'] = 0;
+        }
+      }
+      if(jsonLoc['elem'] == 'col'){
+        if(jsonLoc['col'] == elemento.data('id')){
+          jsonLoc['col'] = 0;
+        }
+      }
       $('#containerMain').unblock();
     }
   );

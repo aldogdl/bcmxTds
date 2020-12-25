@@ -3,106 +3,102 @@
 {% block title %}Localidades{% endblock %}
 {% block bodyContenedor %}
 
-  <main id="containerMain" >
+<section class="row">
+  <article class="col">
+
     <section class="row">
       <article class="col">
-
+        <h5 class="text-muted p-0 m-0 mb-1">Lista de Localidades.</h5>
+        <small class="d-block p-0 m-0"><a id="refreshScreen" href="#">Click para dar de ALTA un nuevo PAÍS</a></small>
+        <hr>
         <section class="row">
-          <article class="col">
-            <h5 class="text-muted p-0 m-0 mb-1">Lista de Localidades.</h5>
-            <small class="d-block p-0 m-0"><a id="refreshScreen" href="#">Click para dar de ALTA un nuevo PAÍS</a></small>
-            <hr>
-            <section class="row">
-              <div class="col">
-                <div class="d-flex align-items-center mb-2">
-                  <div class="mr-2">
-                    <small id="cantPais" class="badge badge-secondary">0</small>
-                  </div>
-                  <h5 class="text-secondary p-0 m-0"> <b>Paises</b> </h5>
-                </div>
-                <div class="altoLocalActu rounded">
-                  <div id="cjaPaises">
-                    <span class="text-muted">Sin Paises Aún...</span>
-                  </div>
-                </div>
+          <div class="col">
+            <div class="d-flex align-items-center mb-2">
+              <div class="mr-2">
+                <small id="cantPais" class="badge badge-secondary">0</small>
               </div>
-
-              <div class="col">
-                <div class="d-flex align-items-center mb-2">
-                  <div class="mr-2">
-                    <small id="cantEdo" class="badge badge-secondary">0</small>
-                  </div>
-                  <h5 class="text-secondary p-0 m-0"> <b>Estados</b> </h5>
-                </div>
-                <div class="altoLocalActu rounded">
-                  <div id="cjaEstados">
-                    <h6 class="text-muted">Selecciona un País</h6>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col">
-                <div class="d-flex align-items-center mb-2">
-                  <div class="mr-2">
-                    <small id="cantCds" class="badge badge-secondary">0</small>
-                  </div>
-                  <h5 class="text-secondary p-0 m-0"> <b>Ciudades</b> </h5>
-                </div>
-                <div class="altoLocalActu rounded">
-                  <div id="cjaCiudades">
-                    <h6 class="text-muted">Selecciona un Estados</h6>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col">
-                <div class="d-flex align-items-center mb-2">
-                  <div class="mr-2">
-                    <small id="cantCols" class="badge badge-secondary">0</small>
-                  </div>
-                  <h5 class="text-secondary p-0 m-0"> <b>Colonias</b> </h5>
-                </div>
-                <div class="altoLocalActu rounded">
-                  <div id="cjaColonias">
-                    <h6 class="text-muted">Selecciona una Ciudad</h6>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </article>
-        </section>
-
-        <section class="row mt-4">
-          <article class="col">
-
-            <b><h5 class="text-primary" id="titQueAlta"> Alta de Nuevo País </h5></b>
-            <div class="d-flex align-items-center">
-              <small id="nomPais" class="d-block mr-2"></small>
-              <i class="fas fa-chevron-right mr-2" style="font-size: 0.8em;"></i>
-              <small id="nomEdo" class="d-block mr-2"></small>
-              <i class="fas fa-chevron-right mr-2" style="font-size: 0.8em;"></i>
-              <small id="nomCd" class="d-block mr-2"></small>
+              <h5 class="text-secondary p-0 m-0"> <b>Paises</b> </h5>
             </div>
-            <hr>
-            <div class="d-flex justify-content-center align-items-center">
-              <form id="frmGestLocalidades" class="mw-50" action="#" method="post">
-                <div class="card shadow rounded p-5">
-                  <div class="input-group">
-                    <input id="txtNombreLoc" name="frmGestLocalidades_nombre" type="text" class="form-control" placeholder="Nombre de la Localidad" aria-label="Nombre de la Localidad" aria-describedby="btnSaveLoc">
-                    <button class="btn colorBtnSig" type="submit" id="btnSaveLoc">Guardar</button>
-                  </div>
-                  <small id="printErrors" class="text-danger mt-1">Campo Requerido</small>
-                </div>
-              </form>
+            <div class="altoLocalActu rounded">
+              <div id="cjaPaises">
+                <span class="text-muted">Sin Paises Aún...</span>
+              </div>
             </div>
-          </article>
+          </div>
+
+          <div class="col">
+            <div class="d-flex align-items-center mb-2">
+              <div class="mr-2">
+                <small id="cantEdo" class="badge badge-secondary">0</small>
+              </div>
+              <h5 class="text-secondary p-0 m-0"> <b>Estados</b> </h5>
+            </div>
+            <div class="altoLocalActu rounded">
+              <div id="cjaEstados">
+                <h6 class="text-muted">Selecciona un País</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="d-flex align-items-center mb-2">
+              <div class="mr-2">
+                <small id="cantCds" class="badge badge-secondary">0</small>
+              </div>
+              <h5 class="text-secondary p-0 m-0"> <b>Ciudades</b> </h5>
+            </div>
+            <div class="altoLocalActu rounded">
+              <div id="cjaCiudades">
+                <h6 class="text-muted">Selecciona un Estados</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="d-flex align-items-center mb-2">
+              <div class="mr-2">
+                <small id="cantCols" class="badge badge-secondary">0</small>
+              </div>
+              <h5 class="text-secondary p-0 m-0"> <b>Colonias</b> </h5>
+            </div>
+            <div class="altoLocalActu rounded">
+              <div id="cjaColonias">
+                <h6 class="text-muted">Selecciona una Ciudad</h6>
+              </div>
+            </div>
+          </div>
         </section>
       </article>
-
     </section>
-    <span id="toS" data-info="{{ app.session.get('tokenServer')}}"></span>
-    <span id="idU" data-iduser="{{ app.session.get('dataUser')['u_id'] }}"></span>
-  </main>
+
+    <section class="row mt-4">
+      <article class="col">
+
+        <b><h5 class="text-primary" id="titQueAlta"> Alta de Nuevo País </h5></b>
+        <div class="d-flex align-items-center">
+          <small id="nomPais" class="d-block mr-2"></small>
+          <i class="fas fa-chevron-right mr-2" style="font-size: 0.8em;"></i>
+          <small id="nomEdo" class="d-block mr-2"></small>
+          <i class="fas fa-chevron-right mr-2" style="font-size: 0.8em;"></i>
+          <small id="nomCd" class="d-block mr-2"></small>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center align-items-center">
+          <form id="frmGestLocalidades" class="mw-50" action="#" method="post">
+            <div class="card shadow rounded p-5">
+              <div class="input-group">
+                <input id="txtNombreLoc" name="frmGestLocalidades_nombre" type="text" class="form-control" placeholder="Nombre de la Localidad" aria-label="Nombre de la Localidad" aria-describedby="btnSaveLoc">
+                <button class="btn colorBtnSig" type="submit" id="btnSaveLoc">Guardar</button>
+              </div>
+              <small id="printErrors" class="text-danger mt-1">Campo Requerido</small>
+            </div>
+          </form>
+        </div>
+      </article>
+    </section>
+  </article>
+
+</section>
 {% endblock %}
 
 {% block javascripts %}

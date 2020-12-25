@@ -27,6 +27,7 @@ export default function(nombreFnc) {
       'uriBaseSelf': 'https://' + baseSelf,
       'uriBasePanel' : dominio + '/apis/zmpanel/panel',
       'uriBaseLocs'  : dominio + '/apis/zmpanel/localidades',
+      'uriBaseCats'  : dominio + '/apis/zmpanel/categos',
       'pathImgsDisNews' : (env == 'dev') ? 'bcmx_tds/fotos_for_disenio' : 'bcmx_tds/fotos_for_disenio',
     };
   }
