@@ -1,0 +1,28 @@
+{% extends 'panel_base.html.twig' %}
+
+{% block title %}Franquicias{% endblock %}
+{% block bodyContenedor %}
+
+  {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+
+  <section class="row">
+    <article class="col">
+
+      <section class="row">
+        <article class="col">
+          <div class="overflow-auto px-3" style="height:70vh;">
+            {% for item in [1,1,1,1,1,1,1] %}
+              {% include 'generales/franquicias/widgets/lst-franqs.html.twig' %}
+            {% endfor %}
+          </div>
+        </article>
+      </section>
+    </article>
+
+  </section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('franq') }}
+{% endblock %}

@@ -1,0 +1,100 @@
+
+{% extends 'panel_base.html.twig' %}
+
+{% block title %}Franquicias{% endblock %}
+{% block bodyContenedor %}
+
+  {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+
+  <section class="row" id="getConfig" data-config="{{ config | json_encode }}">
+    <article class="col">
+
+      <section class="row">
+
+        <article class="col-4">
+          <div class="overflow-auto px-3" style="height:70vh;">
+            <a id="btnLimpiarPizarra" class="btn btn-text text-primary btn-sm" href="#">Limpiar Pizarra (Nueva Alta)</a>
+            <form id="frmConfig" action="#" class="mt-2">
+
+              <!-- CAMPO -->
+              <div class="form-group">
+                <label class="p-0 m-0" for="frmConfig_campo">*Nombre del Campo:</label>
+                <small id="campoHelp" class="form-text text-muted m-0 p-0 mb-2">Establece un campo nuevo</small>
+                <input type="text" class="form-control" id="frmConfig_campo" name="frmConfig[campo]" value="">
+              </div>
+              <!-- VALOR -->
+              <div class="form-group">
+                <label class="p-0 m-0" for="frmConfig_campo">*Descripción del Campo:</label>
+                <small id="campoHelp" class="form-text text-muted m-0 p-0 mb-2">Explica el motivo de su existencia o enfoque</small>
+                <textarea rows="5" class="form-control" id="frmConfig_despeq" name="frmConfig[despeq]"></textarea>
+              </div>
+
+              <!-- CHECKS -->
+              <div class="alert alert-light border rounded">
+                <h6 class="d-block">*Campo para:</h6>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" value="franq" id="frmConfig_tipo1" name="frmConfig[tipo]" checked>
+                      <label class="form-check-label" for="frmConfig_tipo1">
+                        Franquicia
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" value="config" id="frmConfig_tipo2" name="frmConfig[tipo]">
+                      <label class="form-check-label" for="frmConfig_tipo2">
+                        Configuración
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <small class="d-block text-danger m-0 p-0 mt-2 text-center p-2" id="msgError">Los datos con asterico (*) son Obligatorios</small>
+              <!-- BOTON -->
+              <div class="d-flex justify-content-center mt-3">
+                <button type="submit" id="btnAccFile" class="btn btn-primary">Agregar nuevo Campo</button>
+              </div>
+            </form>
+          </div>
+        </article>
+
+        <article class="col-4" id="contenidoLstCampos">
+          <div class="d-flex">
+            <h5 class="text-primary d-block m-auto">Campos de Franquicia</h5>
+            <div>
+              <button type="button" class="btn btn-light btn-sm" disabled><i class="fas fa-cog"></i></button>
+            </div>
+          </div>
+          <hr>
+          <div id="franqContent" class="overflow-auto px-3" style="height:55vh;">
+            <small class="text-muted d-block m-auto">Nada para mostrar</small>
+          </div>
+        </article>
+
+        <article class="col-4">
+          <div class="d-flex">
+            <h5 class="text-primary d-block m-auto">Campos de Configuración</h5>
+            <div>
+              <a href="#" id="submitAll" class="btn btn-danger btn-sm"><i class="fas fa-cloud-upload-alt"></i></a>
+            </div>
+          </div>
+          <hr>
+          <div id="configContent" class="overflow-auto px-3" style="height:55vh;">
+            <small class="text-muted d-block m-auto">Nada para mostrar</small>
+          </div>
+        </article>
+      </section>
+    </article>
+
+  </section>
+  <span id="getPathSendFileConfig" data-path="{{ path('generales_franquicias-setFileConfig') }}"></span>
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('franq') }}
+  <script id="ptlCampoData" type="text/x-jsrender">{% include 'generales/franquicias/widgets/campo-data.html.twig' %}</script>
+{% endblock %}

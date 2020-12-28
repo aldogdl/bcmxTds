@@ -1,0 +1,152 @@
+{% extends 'panel_base.html.twig' %}
+
+{% block title %}Franquicias{% endblock %}
+{% block bodyContenedor %}
+
+{% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+
+<div class="row mb-0 pb-0">
+  <div class="col">
+    <div class="alert alert-primary p-2 border border-secondary">
+      <div class="bg-white border rounded p-2">
+        <p class="d-block">
+          <b>Una Franquicia</b>, se cátaloga como un grupo de comercios que comparten una misma zona geográfica,
+          por ejemplo: Una Plaza Comercial, una Zona Comercial como Obregón, Medrano, Santa Teresita de Jesús, etc...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="row">
+  <article class="col">
+    <form id="frmGestFranq" action="#" method="post">
+
+    <section class="row p-0 m-0">
+
+      <article class="col-6 px-3 m-0">
+
+        <div class="overflow-auto" style="height:55vh;">
+
+            <div class="row p-0 m-0">
+              <div class="col">
+                <div class="form-group">
+                  <label for="franq_data_contac_nombre">*Nombre de la Franquicia:</label>
+                  <input type="text" class="form-control" id="franq_data_contac_nombre" name="franq_data_contac[nombre]">
+                  <small id="franq_data_contac_err_nombre" class="text-danger"></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row p-0 m-0">
+              <div class="col">
+                <div class="form-group">
+                  <label for="franq_data_contac_despeq">*Pequeña Descripción:</label>
+                  <textarea rows="7" class="form-control" id="franq_data_contac_despeq" name="franq_data_contac[despeq]"></textarea>
+                  <small id="franq_data_contac_err_despeq" class="text-danger"></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row p-0 m-0 mt-3">
+              <div class="col" id="blockSubDominio">
+                <div class="form-group">
+                  <label for="franq_data_contac_slug">*Sub Dominio (slug - web):</label>
+                  <input type="text" class="form-control" tabindex="-1"  id="franq_data_contac_slug" name="franq_data_contac[slug]">
+                  <small id="franq_data_contac_err_slug" class="text-danger"></small>
+                </div>
+              </div>
+              <div class="col" id="blocknomApp">
+                <div class="form-group">
+                  <label for="franq_data_contac_nomapp">*Nombre de la Aplicación:</label>
+                  <input type="text" class="form-control" id="franq_data_contac_nomapp" name="franq_data_contac[nomapp]">
+                  <small id="franq_data_contac_err_nomapp" class="text-danger"></small>
+                </div>
+              </div>
+            </div>
+        </div>
+      </article>
+
+      <article id="sideFrmPage" class="col-6 px-3 m-0">
+
+        <div class="overflow-auto" style="height:55vh;">
+          <!-- LOCALIDADES -->
+          <div class="row p-0 m-0">
+            <div class="col">
+              <div class="form-group">
+                <label for="franq_data_contac_pais">*País:</label>
+                <select id="franq_data_contac_pais" name="franq_data_contac[pais]" class="form-control" aria-label="Localidades">
+                  <option value="0">Cargando...</option>
+                </select>
+                <small id="franq_data_contac_err_pais" class="text-danger"></small>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="franq_data_contac_edo">*Estado:</label>
+                <select id="franq_data_contac_edo" name="franq_data_contac[edo]" class="form-control" aria-label="Localidades">
+                  <option value="0">Selecciona País</option>
+                </select>
+                <small id="franq_data_contac_err_edo" class="text-danger"></small>
+              </div>
+            </div>
+          </div>
+          <div class="row p-0 m-0">
+            <div class="col">
+              <div class="form-group">
+                <label for="franq_data_contac_cd">*Ciudad:</label>
+                <select id="franq_data_contac_cd" name="franq_data_contac[cd]" class="form-control" aria-label="Localidades">
+                  <option value="0">Selecciona Estados</option>
+                </select>
+                <small id="franq_data_contac_err_cd" class="text-danger"></small>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="franq_data_contac_col">*Colonia:</label>
+                <select id="franq_data_contac_col" name="franq_data_contac[col]" class="form-control" aria-label="Localidades">
+                  <option value="0">Selecciona Ciudades</option>
+                </select>
+                <small id="franq_data_contac_err_col" class="text-danger"></small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row p-0 m-0">
+            <div class="col">
+              <div class="form-group">
+                <label for="franq_data_contac_domicilio">*Domicilio:</label>
+                <input type="text" class="form-control" id="franq_data_contac_domicilio" name="franq_data_contac[domicilio]">
+                <small id="franq_data_contac_err_domicilio" class="text-danger"></small>
+              </div>
+              <a href="#" id="irToGetLatLng">Ir a Google Maps</a>
+            </div>
+          </div>
+
+          <div class="row p-0 m-0 mt-4">
+            <div class="col">
+              <div class="form-group">
+                <label for="franq_data_contac_latlng">*Latitud y Longitud:</label>
+                <input type="text" class="form-control" id="franq_data_contac_latlng" name="franq_data_contac[latlng]">
+                <small id="franq_data_contac_err_latlng" class="text-danger"></small>
+              </div>
+            </div>
+            <div class="col pb-3">
+              <div class="d-flex align-items-end h-100">
+                <button type="submit" class="btn btn-primary px-2 btn-block colorBtnSig">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </form>
+  </article>
+
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('franq') }}
+{% endblock %}

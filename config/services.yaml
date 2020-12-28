@@ -8,6 +8,7 @@ parameters:
     pathUpPdfs:  '%kernel.project_dir%/public_html/tds'
     pathThumTds: '%kernel.project_dir%/public_html/thum_tds'
     pathToPdfs:  'https://buscomex.com/tds/'
+    fileConfig:  '%kernel.project_dir%/public_html/fraqs/configs/campos.json'
 
 services:
     # default configuration for services in *this* file

@@ -20,15 +20,16 @@ export default function(nombreFnc) {
     const baseSelf  = (env == 'dev') ? 'localhost:8001' : 'buscomex.com';
     const dominio   = protocolo + base;
     return {
-      'protocolo' : protocolo,
-      'base'      : base,
-      'dominio'   : dominio,
-      'uriBaseDb' : dominio,
-      'uriBaseSelf': 'https://' + baseSelf,
-      'uriBasePanel' : dominio + '/apis/zmpanel/panel',
-      'uriBaseLocs'  : dominio + '/apis/zmpanel/localidades',
-      'uriBaseCats'  : dominio + '/apis/zmpanel/categos',
-      'pathImgsDisNews' : (env == 'dev') ? 'bcmx_tds/fotos_for_disenio' : 'bcmx_tds/fotos_for_disenio',
+      'protocolo'        : protocolo,
+      'base'             : base,
+      'dominio'          : dominio,
+      'uriBaseDb'        : dominio,
+      'uriBaseSelf'      : 'https://' + baseSelf,
+      'uriBasePanel'     : dominio + '/apis/zmpanel/panel',
+      'uriBaseLocs'      : dominio + '/apis/zmpanel/localidades',
+      'uriBaseCats'      : dominio + '/apis/zmpanel/categos',
+      'uriBaseFranq'     : dominio + '/apis/zmpanel/franquicias',
+      'pathImgsDisNews'  : (env == 'dev') ? 'bcmx_tds/fotos_for_disenio' : 'bcmx_tds/fotos_for_disenio',
     };
   }
 
