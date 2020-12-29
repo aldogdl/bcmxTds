@@ -14,6 +14,9 @@ Encore
     .addEntry('http', './assets/libs/http.js')
     .addEntry('panelDisenio', './assets/tds/panel-disenio.js')
     .addEntry('franq', './assets/generales/franq.js')
+    .addEntry('franq_config', './assets/generales/franq_config.js')
+    .addEntry('franq_list', './assets/generales/franq_list.js')
+    .addEntry('franq_file', './assets/generales/franq_file.js')
     .addEntry('localidades', './assets/generales/localidades.js')
     .addEntry('categos', './assets/generales/categos.js')
 

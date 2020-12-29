@@ -4,8 +4,9 @@
 {% block bodyContenedor %}
 
 {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+<span id="getTipoFrm" data-idfranq="{{idFranq}}"></span>
 
-<div class="row mb-0 pb-0">
+<div class="row mb-0 pb-0" id="getPathList" data-path="{{ path('generales_franquicias-lstActuales') }}">
   <div class="col">
     <div class="alert alert-primary p-2 border border-secondary">
       <div class="bg-white border rounded p-2">
@@ -18,7 +19,15 @@
   </div>
 </div>
 
-<section class="row">
+<section class="row p-0 m-0 d-none" id="showErrGral">
+  <article class="col">
+    <div class="alert alert-danger p-2 m-0 mb-2">
+      <h5 class="d-block text-center" id="txtMsgErr">ERROR EN EL FORMULARIO</h5>
+    </div>
+  </article>
+</section>
+
+<section class="row p-0 m-0">
   <article class="col">
     <form id="frmGestFranq" action="#" method="post">
 
@@ -26,7 +35,7 @@
 
       <article class="col-6 px-3 m-0">
 
-        <div class="overflow-auto" style="height:55vh;">
+        <div class="overflow-auto" style="height:50vh;">
 
             <div class="row p-0 m-0">
               <div class="col">
@@ -48,7 +57,7 @@
               </div>
             </div>
 
-            <div class="row p-0 m-0 mt-3">
+            <div class="row p-0 m-0">
               <div class="col" id="blockSubDominio">
                 <div class="form-group">
                   <label for="franq_data_contac_slug">*Sub Dominio (slug - web):</label>
@@ -69,7 +78,7 @@
 
       <article id="sideFrmPage" class="col-6 px-3 m-0">
 
-        <div class="overflow-auto" style="height:55vh;">
+        <div class="overflow-auto" style="height:50vh;">
           <!-- LOCALIDADES -->
           <div class="row p-0 m-0">
             <div class="col">
@@ -124,19 +133,20 @@
           </div>
 
           <div class="row p-0 m-0 mt-4">
-            <div class="col">
+            <div class="col-9">
               <div class="form-group">
                 <label for="franq_data_contac_latlng">*Latitud y Longitud:</label>
                 <input type="text" class="form-control" id="franq_data_contac_latlng" name="franq_data_contac[latlng]">
                 <small id="franq_data_contac_err_latlng" class="text-danger"></small>
               </div>
             </div>
-            <div class="col pb-3">
+            <div class="col-3 pb-3">
               <div class="d-flex align-items-end h-100">
-                <button type="submit" class="btn btn-primary px-2 btn-block colorBtnSig">Guardar</button>
+                <button type="submit" class="btn btn-primary px-2 btn-block colorBtnSig" id="btnSubmitFranq">Guardar</button>
               </div>
             </div>
           </div>
+
         </div>
       </article>
     </section>
@@ -144,7 +154,6 @@
   </article>
 
 </section>
-
 {% endblock %}
 
 {% block javascripts %}

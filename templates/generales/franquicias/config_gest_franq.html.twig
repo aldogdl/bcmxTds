@@ -1,0 +1,92 @@
+{% extends 'panel_base.html.twig' %}
+
+{% block title %}Franquicias{% endblock %}
+{% block bodyContenedor %}
+
+  {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+
+  <section class="row" id="getConfigAct" data-id="{{ idFranq }}" data-config="{{ config | json_encode }}">
+    <article class="col">
+
+      <section class="row">
+        <article class="col">
+          <div class="overflow-auto px-3" id="containerLstFranqs" style="height:70vh;">
+
+            <div class="mb-3">
+              <h3 id="setNombreFran">NOMBRE DE LA FRANQUICIA (Cargando...)</h3>
+              <div class="d-flex">
+                <small class="mr-2"> <b>ID:</b> <span id="setIdFranq">0</span> </small>
+                <small class="mr-2"> <b>Domicilio:</b> <span id="setDomiclioFranq">Cargando...</span> </small>
+                <small class="mr-2"> <b>Archivo:</b> <span id="setFileConfig">Sin Configurar</span> </small>
+              </div>
+            </div>
+
+            <div class="card text-center">
+              <div class="card-header">
+
+                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="franq-tab" data-toggle="tab" href="#franq" role="tab" aria-controls="franq" aria-selected="true">
+                      <i class="fas fa-city"></i> Datos de Franquicia
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link"id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="config" aria-selected="true">
+                      <i class="fas fa-mobile-alt"></i> Configuraciones de App
+                    </a>
+                  </li>
+                </ul>
+
+              </div>
+
+              <div class="card-body">
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="franq" role="tabpanel" aria-labelledby="franq-tab">
+                    <section class="row">
+                      <article class="col-10 text-left" id="containerConfigFranq">
+                        <div class="text-center">
+                          <div class="spinner-border text-warning" role="status"></div>
+                          <small class="d-block text-primary">Espera un Momento Por favor</small>
+                        </div>
+                        <hr>
+                        <h5 class="card-title" id="setMsgAccFranq">Datos de Franquicia</h5>
+                        <p class="card-text">Estamos acoplando los campos necesario para capturar tu configuración.</p>
+                      </article>
+                      <article class="col-2">
+                        <a href="#" class="btn btn-primary btnSaveConfig">Guardar</a>
+                      </article>
+                    </section>
+                  </div>
+                  <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+                    <section class="row">
+                      <article class="col-10 text-left" id="containerConfigConfig">
+                        <div class="text-center">
+                          <div class="spinner-border text-warning" role="status"></div>
+                          <small class="d-block text-primary">Espera un Momento Por favor</small>
+                        </div>
+                        <hr>
+                        <h5 class="card-title">Datos de Configuración</h5>
+                        <p class="card-text">Estamos acoplando los campos necesario para capturar tu configuración.</p>
+                      </article>
+                      <article class="col-2">
+                        <a href="#" class="btn btn-primary btnSaveConfig">Guardar</a>
+                      </article>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+      </section>
+    </article>
+
+  </section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('franq_config') }}
+  <script id="ptlInputConfig" type="text/x-jsrender">{% include 'generales/franquicias/widgets/input_config.html.twig' %}</script>
+{% endblock %}

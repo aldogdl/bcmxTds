@@ -1,22 +1,21 @@
-<div class="card p-3 mb-3">
+<div class="card p-3 mb-3" id="bloqueFranq<%:f_id %>" data-id="<%:f_id %>">
   <div class="d-flex">
     <div class="mr-auto">
-      <h5>Plaza San Juan de Dios</h5>
+      <h5 class="text-primary"><%:f_nombre %></h5>
       <div class="d-flex">
-        <small class="mr-2"> <b>ID:</b> 1</small>
-        <small class="mr-2"> <b>Contacto:</b> Luis Covarrubias Espindola</small>
+        <small class="mr-2"> <b>ID:</b> <%:f_id %></small>
+        <small class="mr-2"> <b>Domicilio:</b> <%:f_domicilio %></small>
       </div>
     </div>
     <div class="ml-auto">
       <div class="d-flex justify-content-end mt-2">
-        <small class="mr-4"> <a class="btn btn-sm btn-outline-dark" href="#" title="Configurar"><i class="fas fa-cog"></i></a> </small>
+        <small class="mr-4"> <a class="btn btn-sm btn-outline-dark" id="btnGestConfig<%:f_id %>" data-id="<%:f_id %>" href="{{ path('generales_franquicias-gestConfig', {'idFranq':'__idFranq__'}) }}" title="Configurar"><i class="fas fa-cog"></i></a> </small>
+        <small class="mr-4"> <a class="btn btn-sm btn-outline-warning" id="btnAddImgs" data-id="<%:f_id %>" href="#" title="Logotipo de la Web"><i class="fas fa-camera"></i></a> </small>
+        <small class="mr-4"> <a class="btn btn-sm btn-outline-primary" id="btnEditFranq" data-id="<%:f_id %>" href="{{ path('generales_franquicias-frm', {'idFranq':'__idFranq__'}) }}" title="Editar"><i class="fas fa-pencil-alt"></i></a> </small>
         <small class="mr-4"> <a class="btn btn-sm btn-outline-secondary" href="#" title="ir a PlayStore"><i class="fab fa-google-play"></i></a> </small>
-        <small class="mr-4"> <a class="btn btn-sm btn-outline-primary" href="#" title="Editar"><i class="fas fa-pencil-alt"></i></a> </small>
         <small class="mr-4"> <a class="btn btn-sm btn-outline-success" href="#" title="Pausar"><i class="fas fa-pause"></i></a> </small>
         <small class="mr-4"> <a class="btn btn-sm btn-outline-danger" href="#" title="Eliminar"><i class="fas fa-trash"></i></a> </small>
       </div>
     </div>
   </div>
-
-
 </div>

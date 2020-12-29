@@ -1,0 +1,12 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col-4 text-right">
+      <label for="<%:~getIdInput(campo, tipo) %>"><%:~getTitulo(campo) %>:</label>
+      <a href="#" title="<%:despeq %>"><i class="fas fa-question-circle"></i></a>
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" id="<%:~getIdInput(campo, tipo) %>" name="<%:~getNameInput(campo, tipo) %>">
+    </div>
+  </div>
+  <small id="<%:~getIdInput(campo, tipo) %>_err" class="text-danger"></small>
+</div>

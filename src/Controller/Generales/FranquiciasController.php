@@ -15,12 +15,13 @@ class FranquiciasController extends AbstractController
     private $templateBase = 'generales/franquicias/';
 
     /**
-     * @Route("frm-gestion-franquicias/", name="generales_franquicias-frm")
+     * @Route("{idFranq}/frm-gestion-franquicias/", defaults={"idFranq":"0"}, name="generales_franquicias-frm")
      */
-    public function frmGestionFranquicias(): Response
+    public function frmGestionFranquicias($idFranq): Response
     {
         return $this->render($this->templateBase . 'frm-franq.html.twig', [
             'estasEn' => 'Franquicias > Nueva Franquicia',
+            'idFranq' => $idFranq
         ]);
     }
 
@@ -56,6 +57,20 @@ class FranquiciasController extends AbstractController
         $config = file_put_contents($this->getParameter('fileConfig'), json_encode($data));
 
         return $this->json(['has' => $config, 'send' => $data]);
+    }
+
+    /**
+     * @Route("{idFranq}/configurando-franquicia/", name="generales_franquicias-gestConfig")
+     */
+    public function gestConfig($idFranq): Response
+    {
+        $config = file_get_contents($this->getParameter('fileConfig'));
+
+        return $this->render($this->templateBase . 'config_gest_franq.html.twig', [
+            'estasEn' => 'Franquicias > Lista Existentes > Gestionando Configuración',
+            'config'  => json_decode($config, true),
+            'idFranq' => $idFranq
+        ]);
     }
 
 }
