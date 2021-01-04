@@ -4,7 +4,7 @@
 {% block title %}Franquicias{% endblock %}
 {% block bodyContenedor %}
 
-  {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+  {% include 'admin/franquicias/widgets/nav-bar.html.twig' %}
 
   <section class="row" id="getConfig" data-config="{{ config | json_encode }}">
     <article class="col">
@@ -91,10 +91,10 @@
     </article>
 
   </section>
-  <span id="getPathSendFileConfig" data-path="{{ path('generales_franquicias-setFileConfig') }}"></span>
+  <span id="getPathSendFileConfig" data-path="{{ path('admin_franquicias-setFileConfig') }}"></span>
 {% endblock %}
 
 {% block javascripts %}
   {{ encore_entry_script_tags('franq_file') }}
-  <script id="ptlCampoData" type="text/x-jsrender">{% include 'generales/franquicias/widgets/campo-data.html.twig' %}</script>
+  <script id="ptlCampoData" type="text/x-jsrender">{% include 'admin/franquicias/widgets/campo-data.html.twig' %}</script>
 {% endblock %}

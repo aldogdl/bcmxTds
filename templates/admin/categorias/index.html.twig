@@ -18,7 +18,7 @@
               </div>
               <hr>
               <div class="overflow-auto px-3 bg-white" style="height:70vh;">
-                <small> <a href="{{ path('generales_categorias-index') }}">Click para dar de Alta nueva Categoría</a> </small>
+                <small> <a href="{{ path('admin_categorias-index') }}">Click para dar de Alta nueva Categoría</a> </small>
                 <div class="p-2" id="cjaCategos">
                   <h6 class="text-muted">Sin Elemento para mostrar</h6>
                 </div>
@@ -65,5 +65,5 @@
 
 {% block javascripts %}
   {{ encore_entry_script_tags('categos') }}
-  <script id="ptlCheckCats" type="text/x-jsrender">{% include 'generales/categorias/widgets/check_cats.html.twig' %}</script>
+  <script id="ptlCheckCats" type="text/x-jsrender">{% include 'admin/categorias/widgets/check_cats.html.twig' %}</script>
 {% endblock %}

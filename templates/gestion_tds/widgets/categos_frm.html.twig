@@ -1,0 +1,41 @@
+<div class="card p-3" id="frmCategosBlock">
+  <div class="alert alert-info d-flex">
+    <p id="getPalClas"><%:queVende %></p>
+    <a href="#" id="btnEditPalClas" class="text-right ml-auto"><small><i class="fas fa-edit"></i></small></a>
+  </div>
+  <form id="frmCategosErr" action="#" method="post" data-id="<%:idTd %>">
+    <section class="row">
+      <article class="col">
+        <div class="form-group">
+          <label for="frmCategosErr_cat">*Categorías:</label>
+          <select class="form-control" id="frmCategosErr_cat" name="frmCategosErr[cat]">
+            <option value="aqui">Preciona aquí</option>
+            <option value="buscar">Buscar Categorías</option>
+          </select>
+        </div>
+      </article>
+      <article class="col">
+        <div class="form-group">
+          <label for="frmCategosErr_scat">*Sub Categorías:</label>
+          <select class="form-control" id="frmCategosErr_scat" name="frmCategosErr[scat]">
+            <option value="0">Selecciona Categoría</option>
+          </select>
+        </div>
+      </article>
+    </section>
+
+    <section class="row">
+      <article class="col">
+        <div class="form-group">
+          <label for="frmCategosErr_div">*División:</label>
+          <input type="text" class="form-control" id="frmCategosErr_div" name="frmCategosErr[div]" value="<%:txtDiv %>">
+          <small class="text-muted">Coloca una palabra de lo que más venden.</small>
+        </div>
+      </article>
+    </section>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary colorBtnSig" id="btnCategosErr"> Guardar</button>
+    </div>
+  </form>
+
+</div>

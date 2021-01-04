@@ -49,6 +49,24 @@ class PanelTdsController extends AbstractController
     }
 
     /**
+     * @Route("{pdfFile}/build-img-from-pdf/", methods={"GET"}, name="tds_panel-crearImgFromPdf")
+     */
+    public function buildImgFromPdf(SeguridadService $session, $pdfFile): Response
+    {
+        if(!$session->hasToken()) { return $this->redirectToRoute('security'); }
+        $finder = new Finder();
+        $finder->files()->in($this->getParameter('pathUpPdfs'))->name($pdfFile);
+
+        if($finder->hasResults()){
+          foreach ($finder as $file) {
+            $fileNameWithExtension = $file->getRelativePathname();
+            $this->pdfToImg($fileNameWithExtension);
+          }
+        }
+        return $this->json(['result' => 'Listo!!']);
+    }
+
+    /**
     * Generamos el formulario para subir el PDF
     */
     public function getFrmUploadPdf()

@@ -1,0 +1,60 @@
+<div class="card mb-3 p-2" id="bloqueCard<%:td_id %>">
+  <div class="d-flex">
+    <h6 class="text-primary"> <span class="d-none" id="isChecked<%:td_id %>"><i class="fas fa-check text-success"></i>&nbsp;</span> <%:td_nombreEmpresa %></h6>
+    <div class="ml-auto">
+      <small class="badge badge-secondary">$ <span id="bloqueCosto<%:td_id %>"><%:td_costo %></span> </small>
+    </div>
+  </div>
+  <small><%:td_giro %></small>
+  <hr>
+  <div class="d-flex">
+    <div class="ml-auto">
+      <%if ds_status == 'nuevo' %>
+        <small class="mr-3 badge badge-danger px-3"><%:ds_status.toUpperCase() %></small>
+      <%/if %>
+      <%if ds_status == 'terminado' %>
+        <small class="mr-3 badge badge-primary px-3"><%:ds_status.toUpperCase() %></small>
+      <%/if %>
+      <%if ds_status == 'proceso' %>
+        <small class="mr-3 badge badge-success px-3"><%:ds_status.toUpperCase() %></small>
+      <%/if %>
+      <%if td_isPagado %>
+        <small class="text-success font-weight-bold isPagado">Pagado</small>
+      <%else %>
+        <small class="text-danger font-weight-bold isPagado">Sin Pago</small>
+      <%/if %>
+    </div>
+  </div>
+  <div class="d-flex justify-content-around align-items-end">
+    <div class="text-left">
+      <div class="d-flex">
+        <small class="text-secondary">Diseñado por:</small>
+        <small class="text-success font-weight-bold ml-2"><%:d_nombre %></small>
+      </div>
+      <div class="d-flex">
+        <small class="text-secondary">Vendido por:</small>
+        <small class="text-success font-weight-bold ml-2"><%:v_nombre %></small>
+      </div>
+      <div class="d-flex">
+        <small class="text-secondary">Cliente:</small>
+        <small class="text-success font-weight-bold ml-2"><%:~trucate(u_nombre) %></small>
+      </div>
+      <div class="d-flex">
+        <small class="text-secondary">Identificadores:</small>
+        <small class="text-dark font-weight-bold ml-2">ID:</small>
+        <small class="text-success font-weight-bold ml-2"><%:td_id %></small>
+        <small class="text-dark font-weight-bold ml-2">Diseño:</small>
+        <small class="text-success font-weight-bold ml-2"><%:ds_id %></small>
+      </div>
+    </div>
+    <div class="ml-auto">
+      <a class="btn btn-outline-primary btn-sm ml-3" id="btnVerData<%:td_id %>" data-nombre="<%:td_nombreEmpresa %>" data-id="<%:td_id %>" data-disenio="<%:ds_id %>" style="font-size: 1.5rem;" href="#" title="Ver Datos Completos"><i class="far fa-eye"></i></a>
+      <a class="btn btn-outline-warning btn-sm ml-3 px-3" id="btnMedic<%:td_id %>" data-nombre="<%:td_nombreEmpresa %>" data-id="<%:td_id %>" data-disenio="<%:ds_id %>" style="font-size: 1.5rem;" href="#" title="Checar Sanidad"><i class="fas fa-notes-medical"></i></a>
+      <%if ds_status != 'terminado' %>
+        <a class="btn btn-outline-light btn-sm ml-3" tabindex="-1" style="font-size: 1.5rem;" href="#" title="Terminar Diseño"><i class="fas fa-quidditch text-muted"></i></a>
+      <%else %>
+        <a class="btn btn-outline-danger btn-sm ml-3" id="btnTerminar<%:td_id %>" data-nombre="<%:td_nombreEmpresa %>" data-bloque="bloqueCard<%:td_id %>" data-id="<%:td_id %>" data-disenio="<%:ds_id %>" style="font-size: 1.5rem;" href="#" title="Terminar Diseño"><i class="fas fa-quidditch"></i></a>
+      <%/if %>
+    </div>
+  </div>
+</div>

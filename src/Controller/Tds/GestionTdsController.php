@@ -20,4 +20,24 @@ class GestionTdsController extends AbstractController
           'estasEn' => 'Tarjetas Digitales'
         ]);
     }
+
+    /**
+     * @Route("{tdPdf}/check-existencia-elementos-tds/", methods={"GET"}, name="tds-check_existencia_elementos_tds")
+     */
+    public function checkExistenciaElementoTds($tdPdf): Response
+    {
+        $result = ['abort' => false, 'msg' => 'ok', 'body' => [
+          'td' => true, 'img' => true
+        ]];
+
+        if(!file_exists($this->getParameter('pathUpPdfs') . '/' . $tdPdf)) {
+          $result['body']['td'] = false;
+        }
+        $tdJpg = str_replace('.pdf', '.jpg', $tdPdf);
+        if(!file_exists($this->getParameter('pathThumTds') . '/' . $tdJpg)) {
+          $result['body']['img'] = false;
+        }
+        $result['abort'] = (count($result['body']) > 0) ? true : false;
+        return $this->json($result);
+    }
 }

@@ -24,11 +24,12 @@ export default function(nombreFnc) {
       'base'             : base,
       'dominio'          : dominio,
       'uriBaseDb'        : dominio,
-      'uriBaseSelf'      : 'https://' + baseSelf,
+      'uriBaseSelf'      : protocolo + baseSelf,
       'uriBasePanel'     : dominio + '/apis/zmpanel/panel',
       'uriBaseLocs'      : dominio + '/apis/zmpanel/localidades',
       'uriBaseCats'      : dominio + '/apis/zmpanel/categos',
       'uriBaseFranq'     : dominio + '/apis/zmpanel/franquicias',
+      'uriBaseTarje'     : dominio + '/apis/zmpanel/tarjetas',
       'pathImgsDisNews'  : (env == 'dev') ? 'bcmx_tds/fotos_for_disenio' : 'bcmx_tds/fotos_for_disenio',
     };
   }

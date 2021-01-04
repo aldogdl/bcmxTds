@@ -3,7 +3,7 @@
 {% block title %}Franquicias{% endblock %}
 {% block bodyContenedor %}
 
-  {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+  {% include 'admin/franquicias/widgets/nav-bar.html.twig' %}
 
   <section class="row" id="getConfigAct" data-id="{{ idFranq }}" data-config="{{ config | json_encode }}">
     <article class="col">
@@ -53,7 +53,7 @@
                         <p class="card-text">Estamos acoplando los campos necesario para capturar tu configuración.</p>
                       </article>
                       <article class="col-2">
-                        <a href="#" class="btn btn-primary">Guardar</a>
+                        <a href="#" class="btn btn-primary btnSaveConfig">Guardar</a>
                       </article>
                     </section>
                   </div>
@@ -69,7 +69,7 @@
                         <p class="card-text">Estamos acoplando los campos necesario para capturar tu configuración.</p>
                       </article>
                       <article class="col-2">
-                        <a href="#" class="btn btn-primary">Guardar</a>
+                        <a href="#" class="btn btn-primary btnSaveConfig">Guardar</a>
                       </article>
                     </section>
                   </div>
@@ -87,6 +87,6 @@
 {% endblock %}
 
 {% block javascripts %}
-  {{ encore_entry_script_tags('franq') }}
-  <script id="ptlInputConfig" type="text/x-jsrender">{% include 'generales/franquicias/widgets/input_config.html.twig' %}</script>
+  {{ encore_entry_script_tags('franq_config') }}
+  <script id="ptlInputConfig" type="text/x-jsrender">{% include 'admin/franquicias/widgets/input_config.html.twig' %}</script>
 {% endblock %}

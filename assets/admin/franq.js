@@ -66,7 +66,6 @@ $(document).ready(function(){
     var calle = $('#franq_data_contac_domicilio').val();
     const regex = /\s/gi;
 
-    console.log(calle.replace(regex, '+'));
     loc.push(calle.replace(regex, '+'));
     loc.push($('#franq_data_contac_col option:selected').text().replace(regex, '+'));
     loc.push($('#franq_data_contac_cd option:selected').text().replace(regex, '+'));
@@ -89,8 +88,7 @@ $(document).ready(function(){
 
 ///
 function _sendData(dataSend) {
-  
-  console.log(dataSend);
+
   _bloquearAllScreen('containerMain', 'Guardando...');
   http('post',
   global['uriBaseFranq'] + '/save-data-franq/',

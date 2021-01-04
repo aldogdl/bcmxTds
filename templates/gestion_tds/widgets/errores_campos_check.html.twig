@@ -1,0 +1,8 @@
+<div class="card p-3 alert alert-<%:status %> border border-<%:status %>" id="bloque<%:campo %>">
+  <div class="d-flex">
+    <h6><%:campo.toUpperCase() %></h6>
+    <a href="#" id="btnEdit<%:campo %>" data-id="<%:idTd %>" data-campo="<%:campo %>" class="text-right ml-auto"><small><i class="fas fa-edit"></i></small></a>
+  </div>
+  <small><%:msg %></small>
+  <small class="text-muted" id="getValueCampo_<%:campo %>"><%:value %></small>
+</div>

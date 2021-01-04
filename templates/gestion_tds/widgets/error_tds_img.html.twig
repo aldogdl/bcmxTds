@@ -1,0 +1,21 @@
+<div class="card p-2" id="blockTdImg">
+  <%if td %>
+    <h6><i class="fas fa-check text-primary"></i>&nbsp;<span class="text-success">La Tarjeta Interactiva EXISTE</span> </h6>
+  <%else %>
+    <h6><i class="fas fa-exclamation-triangle text-danger"></i> PELIGRO La Tarjeta Interactiva NO EXISTE</h6>
+  <%/if %>
+
+  <%if img %>
+    <h6><i class="fas fa-check text-primary"></i>&nbsp;<span class="text-success">La Imagen Representativa de la Tarjeta Interactiva EXISTE</span> </h6>
+  <%else %>
+    <%if td %>
+    <div class="border border-danger p-3">
+      <h6><i class="fas fa-exclamation-triangle text-danger"></i> PELIGRO La Imagen Representativa de la Tarjeta Interactiva NO EXISTE</h6>
+      <a href="#" id="btnRepararImg" class="btn btn-sm d-block text-right text-primary">REPARAR</a>
+    </div>
+    <%else %>
+      <h6><i class="fas fa-exclamation-triangle text-danger"></i> PELIGRO La Imagen Representativa de la Tarjeta Interactiva NO EXISTE</h6>
+    <%/if %>
+  <%/if %>
+
+</div>

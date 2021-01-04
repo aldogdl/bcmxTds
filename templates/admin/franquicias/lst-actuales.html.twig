@@ -3,7 +3,7 @@
 {% block title %}Franquicias{% endblock %}
 {% block bodyContenedor %}
 
-  {% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+  {% include 'admin/franquicias/widgets/nav-bar.html.twig' %}
 
   <section class="row">
     <article class="col">
@@ -25,5 +25,5 @@
 
 {% block javascripts %}
   {{ encore_entry_script_tags('franq_list') }}
-  <script id="ptlfranq" type="text/x-jsrender">{% include 'generales/franquicias/widgets/lst-franqs.html.twig' %}</script>
+  <script id="ptlfranq" type="text/x-jsrender">{% include 'admin/franquicias/widgets/lst-franqs.html.twig' %}</script>
 {% endblock %}

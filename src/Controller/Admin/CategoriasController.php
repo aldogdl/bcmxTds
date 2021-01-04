@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Controller\Generales;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/bcmx/generales/localidades/")
+ * @Route("/bcmx/admin/categorias/")
  */
-class LocalidadesController extends AbstractController
+class CategoriasController extends AbstractController
 {
 
-    private $templateBase = 'generales/localidades/';
+    private $templateBase = 'admin/categorias/';
 
     /**
-     * @Route("index/", name="generales_localidades-index")
+     * @Route("index/", name="admin_categorias-index")
      */
     public function index(): Response
     {
         return $this->render($this->templateBase . 'index.html.twig', [
-          'estasEn' => 'Localidades',
+            'estasEn' => 'Categorías',
         ]);
     }
 }

@@ -3,10 +3,10 @@
 {% block title %}Franquicias{% endblock %}
 {% block bodyContenedor %}
 
-{% include 'generales/franquicias/widgets/nav-bar.html.twig' %}
+{% include 'admin/franquicias/widgets/nav-bar.html.twig' %}
 <span id="getTipoFrm" data-idfranq="{{idFranq}}"></span>
 
-<div class="row mb-0 pb-0" id="getPathList" data-path="{{ path('generales_franquicias-lstActuales') }}">
+<div class="row mb-0 pb-0" id="getPathList" data-path="{{ path('admin_franquicias-lstActuales') }}">
   <div class="col">
     <div class="alert alert-primary p-2 border border-secondary">
       <div class="bg-white border rounded p-2">

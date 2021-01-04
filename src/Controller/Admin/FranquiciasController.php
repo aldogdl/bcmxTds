@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Generales;
+namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,14 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/bcmx/generales/franquicias/")
+ * @Route("/bcmx/admin/franquicias/")
  */
 class FranquiciasController extends AbstractController
 {
-    private $templateBase = 'generales/franquicias/';
+    private $templateBase = 'admin/franquicias/';
 
     /**
-     * @Route("{idFranq}/frm-gestion-franquicias/", defaults={"idFranq":"0"}, name="generales_franquicias-frm")
+     * @Route("{idFranq}/frm-gestion-franquicias/", defaults={"idFranq":"0"}, name="admin_franquicias-frm")
      */
     public function frmGestionFranquicias($idFranq): Response
     {
@@ -26,7 +26,7 @@ class FranquiciasController extends AbstractController
     }
 
     /**
-     * @Route("lista-actuales/", name="generales_franquicias-lstActuales")
+     * @Route("lista-actuales/", name="admin_franquicias-lstActuales")
      */
     public function listaActuales(): Response
     {
@@ -36,7 +36,7 @@ class FranquiciasController extends AbstractController
     }
 
     /**
-     * @Route("archivo-configuracion/", name="generales_franquicias-fileConfig")
+     * @Route("archivo-configuracion/", name="admin_franquicias-fileConfig")
      */
     public function fileConfig(): Response
     {
@@ -49,7 +49,7 @@ class FranquiciasController extends AbstractController
     }
 
     /**
-     * @Route("set-archivo-configuracion/", methods={"POST"}, name="generales_franquicias-setFileConfig")
+     * @Route("set-archivo-configuracion/", methods={"POST"}, name="admin_franquicias-setFileConfig")
      */
     public function setFileConfig(Request $req): Response
     {
@@ -60,7 +60,7 @@ class FranquiciasController extends AbstractController
     }
 
     /**
-     * @Route("{idFranq}/configurando-franquicia/", name="generales_franquicias-gestConfig")
+     * @Route("{idFranq}/configurando-franquicia/", name="admin_franquicias-gestConfig")
      */
     public function gestConfig($idFranq): Response
     {
